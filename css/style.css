@@ -1,0 +1,48 @@
+* {
+    border: solid 3px aqua
+}
+
+body {
+    background-color: white;
+    max-width: 1280px;
+    max-height: 800px;
+
+}
+
+#mother-stats-battle-menus {
+    display:flex;
+    justify-content: space-between;
+    
+}
+.player-containers {
+    display: flex;
+    flex-flow: column;
+}
+
+#p1-container {
+    flex-direction: row-reverse;
+}
+
+#p2-container {
+    flex-direction: row;
+}
+
+.battle-menus {
+    display: flex;
+}
+
+#p1-battle-menu {
+    border: dotted 3px green;
+}
+
+#p2-battle-menu {
+    border: dotted 3px purple;
+}
+
+#p1-stats {
+    border: dotted 3px gold
+}
+
+#p2-stats {
+    border: dotted 3px hotpink
+}
