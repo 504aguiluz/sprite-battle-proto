@@ -1,48 +1,138 @@
-* {
-    border: solid 3px aqua
+/* * {
+    
+} */
+html {
+    /* background-image: url('../img/snow-field.jpeg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    opacity: 0.9; */
 }
 
 body {
-    background-color: white;
-    max-width: 1280px;
-    max-height: 800px;
 
 }
 
-#mother-stats-battle-menus {
+#bkg-img {
+    /* -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; */
+    height:fit-content;
+    width:fit-content;
+    opacity: 0.6;
+}
+
+
+/* sprites */
+img.p1-sprite {
+    width: 400px;
+    height: auto;
+    position: fixed;
+    left: 150px;
+    top: 150px;
+}
+
+/* battle and stat menus */
+.footer {
     display:flex;
-    justify-content: space-between;
-    
+    position: fixed;
+    /* align-items: flex-end; */
+    bottom: 20px;
+    width: 100%;
+    justify-content: space-between;    
+    color: white
 }
+
 .player-containers {
     display: flex;
-    flex-flow: column;
+    border: solid 5px white;
+    border-radius: 10px;
+    border-style: groove;
+    width: 400px;
+    justify-content: space-between;
+    
 }
 
 #p1-container {
     flex-direction: row-reverse;
+    
 }
 
 #p2-container {
+    display: flex;
     flex-direction: row;
+    padding-right: 10px;
 }
 
-.battle-menus {
+.battle-menu {
     display: flex;
+    background-color: rgb(78, 78, 255);
+    flex-flow: column;
+    border: solid 5px white;
+    border-radius: 10px;
+    border-style:groove;
+    margin: 1px;
+    width: 300px;
+    font-size: 20px;;
+    font-family: 'Gowun Batang', serif;
+    
 }
 
 #p1-battle-menu {
-    border: dotted 3px green;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 #p2-battle-menu {
-    border: dotted 3px purple;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
 }
 
 #p1-stats {
-    border: dotted 3px gold
+    border: solid 3px white;
+    border-radius: 10px;
+    flex-direction: row;
+    justify-content: center;
 }
 
 #p2-stats {
-    border: dotted 3px hotpink
+    border: solid 3px white;
+    border-radius: 10px;
+    flex-direction: row;
+    justify-content: center;
 }
+
+.battle-buttons {
+    background: transparent;
+    border-style: hidden;
+    color: white;
+    font-weight: 700;
+    font-size: 25px;
+    letter-spacing: 3px;
+    font-family: 'Gowun Batang', serif;
+}
+
+#p1-stats-nums {
+    padding-top: 50px;
+    padding-right: 10px;
+}
+#p2-stats-nums {
+    padding-top: 50px;
+    padding-right: 10px;
+}
+
+
+/* look up display:none or visibility options */
+
+
+/* fonts */
+/* font-family: 'Gowun Batang', serif;
+font-family: 'Josefin Sans', sans-serif;
+font-family: 'Julius Sans One', sans-serif;
+font-family: 'Tourney', cursive;
+font-family: 'VT323', monospace;
+font-family: 'Yomogi', cursive; */

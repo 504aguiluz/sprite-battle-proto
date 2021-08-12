@@ -118,3 +118,25 @@ document.getElementById('p2-fight-button').addEventListener('click', ()=>{player
 document.getElementById('p2-spell-button').addEventListener('click', ()=>{player2.spell(player2, player1)})
 document.getElementById('p2-heal-button').addEventListener('click', ()=>{player2.heal(player2)})
 
+
+
+// notes
+// https://stackoverflow.com/questions/31565045/toggle-background-image-html
+
+// js toggle class
+// document.body.classList.toggle('BgClass') 
+
+// css background
+// body {
+//     background-size: cover; 
+//     background-repeat: no-repeat;  
+//     background-attachment: fixed 
+//   }
+// .BgClass {
+//     background-image: url('http://freedomwallpaper.com/wallpaper2/funky-wallpaper-hd.jpg');
+// }
+
+
+
+
+

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    <img id="bkg-img"src="img/snow-field.jpeg">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,33 +8,56 @@
     <title>SPRITE-BATTLE</title>
     <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript" src="js/app.js" defer></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&family=Josefin+Sans&family=Julius+Sans+One&family=Tourney:wght@100&family=VT323&family=Yomogi&display=swap');
+        
+    </style>
 </head>
-<body>
-    <div id="mother-stats-battle-menus">
+<body >
+    <img class="p1-sprite" src="gifs/Martial-Hero-idle.gif" alt="samurai fighter">
+   
+</body>
+<footer class="footer">
         <div id="p1-container" class="player-containers">
-            <div id="p1-battle-menu" class="battle-menus">
-                <button id="p1-fight-button" class="p1-battle-buttons">P1:fight</button>
-                <button id="p1-spell-button" class="p1-battle-buttons">P1:spell</button>
-                <button id="p1-heal-button" class="p1-battle-buttons">P1:heal</button>
+            <div id="p1-battle-menu" class="battle-menu">
+                <!-- <h1 class="labels">p1-container</h1> -->
+                <button id="p1-fight-button" class="battle-buttons">Fight</button>
+                <button id="p1-spell-button" class="battle-buttons">Spell</button>
+                <button id="p1-heal-button" class="battle-buttons">Heal</button>
             </div>
-            <div id="p1-stats" class="battle-menus">
-                <h3>player1:</h3>
-                <h3>HP:60/60</h3>
-                <h3>MP:30/30</h3>
+            <div id="p1-stats" class="battle-menu">
+                <div id="p1-stats-text">
+                    <h3 class="p1-name">Player1:</h3>
+                    <h3>HP</h3>
+                    <h3>MP</h3>
+                </div>
+                <div id="p1-stats-nums">
+                    <h3></h3>
+                    <h3>60/  60</h3>
+                    <h3>30/  30</h3>
+                </div>
             </div>
         </div>
         <div id="p2-container" class="player-containers">
-            <div id="p2-battle-menu" class="battle-menus">
-                <button id="p2-fight-button" class="p2-battle-buttons">P2:fight</button>
-                <button id="p2-spell-button" class="p2-battle-buttons">P2:spell</button>
-                <button id="p2-heal-button" class="p2-battle-buttons">P2:heal</button>
+            <div id="p2-battle-menu" class="battle-menu">
+                <!-- <h1>p2-container</h1> -->
+                <button id="p2-fight-button" class="battle-buttons">Fight</button>
+                <button id="p2-spell-button" class="battle-buttons">Spell</button>
+                <button id="p2-heal-button" class="battle-buttons">Heal</button>
             </div>
-            <div id="p2-stats" class="battle-menus">
-                <h3>player2:</h3>
-                <h3>HP:60/60</h3>
-                <h3>MP:30/30</h3>
+            <div id="p2-stats" class="battle-menu">
+                <div id="p2-stats-text">
+                    <h3 class="p2-name">Player2:</h3>
+                    <h3>HP</h3>
+                    <h3>MP</h3>
+                </div>
+                <div id="p2-stats-nums">
+                    <h3></h3>
+                    <h3>60/  60</h3>
+                    <h3>30/  30</h3>
+                </div>
             </div>
         </div>
-    </div>
-</body>
+</footer>
+
 </html>
