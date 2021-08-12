@@ -2,12 +2,12 @@
     
 } */
 html {
-    /* background-image: url('../img/snow-field.jpeg');
+    background-image: url('../img/snow-field.jpeg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    opacity: 0.9; */
+    opacity: 0.9;
 }
 
 body {
@@ -27,10 +27,18 @@ body {
 /* sprites */
 img.p1-sprite {
     width: 400px;
-    height: auto;
     position: fixed;
-    left: 150px;
+    left: 200px;
     top: 150px;
+}
+
+img.p2-sprite {
+    width: 230px;
+    position: fixed;
+    /* left: 150px; */
+    top: 87px;
+    right: 200px;
+    transform: scaleX(-1);
 }
 
 /* battle and stat menus */
