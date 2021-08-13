@@ -1,5 +1,7 @@
 console.log('SPRITE BATTLE')
 
+const hipHop4 = document.getElementById('hip-hop4')
+
 class Sprite {
     constructor (name) {
         this.name = name
@@ -80,6 +82,8 @@ class Sprite {
 const player1 = new Sprite ('player1')
 const player2 = new Sprite ('player2')
 
+
+
 function introSequence(){
     
 }
@@ -104,6 +108,14 @@ function winSequence(){
 
 }
 
+function changeAnimation(){
+    console.log('change animation')
+    document.querySelector('.p1-sprite').src = 'gifs/Martial-Hero-run.gif'
+    document.querySelector('.p1-sprite').style.animation = "attack-right 1s"
+    document.querySelector('.p1-sprite').src = 'gifs/Martial-Hero-attack.gif'
+    hipHop4.play()
+}
+
 // initGame()
 
 // console log section
@@ -117,6 +129,8 @@ document.getElementById('p1-heal-button').addEventListener('click', ()=>{player1
 document.getElementById('p2-fight-button').addEventListener('click', ()=>{player2.fight(player2, player1)})
 document.getElementById('p2-spell-button').addEventListener('click', ()=>{player2.spell(player2, player1)})
 document.getElementById('p2-heal-button').addEventListener('click', ()=>{player2.heal(player2)})
+document.getElementById('test-button').addEventListener('click', changeAnimation)
+
 
 
 

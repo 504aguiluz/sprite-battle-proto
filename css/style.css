@@ -2,6 +2,8 @@
     
 } */
 html {
+    background-position: top;
+    /* background-repeat: no-repeat; */
     background-image: url('../img/snow-field.jpeg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -23,16 +25,18 @@ body {
     opacity: 0.6;
 }
 
-
 /* sprites */
 img.p1-sprite {
+    display: flex;
     width: 400px;
     position: fixed;
     left: 200px;
     top: 150px;
+    /* animation: float 1s ease-in forwards infinite alternate */
 }
 
 img.p2-sprite {
+    display: flex;
     width: 230px;
     position: fixed;
     /* left: 150px; */
@@ -124,6 +128,11 @@ img.p2-sprite {
     font-family: 'Gowun Batang', serif;
 }
 
+#test-button {
+    position: fixed;
+    left:  50%;
+}
+
 #p1-stats-nums {
     padding-top: 50px;
     padding-right: 10px;
@@ -133,9 +142,16 @@ img.p2-sprite {
     padding-right: 10px;
 }
 
+/* animations */ 
+@keyframes attack-right { 
+    0% {transform: translateX(0%);
+        .p1-sprite.src = 'gifs/Martial-Hero-run.gif'}
+    50% {transform: translateX(50%);
+        .p1-sprite.src = 'gifs/Martial-Hero-attack.gif': }
+    100% {transform: translateX(0%);}
+}
 
 /* look up display:none or visibility options */
-
 
 /* fonts */
 /* font-family: 'Gowun Batang', serif;
