@@ -9,7 +9,7 @@ html {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    opacity: 0.9;
+    opacity: 1;
 }
 
 body {
@@ -22,7 +22,7 @@ body {
     background-size: cover; */
     height:fit-content;
     width:fit-content;
-    opacity: 0.6;
+    opacity: 0.5;
 }
 
 /* sprites */
@@ -35,11 +35,53 @@ img.p1-sprite {
     /* animation: float 1s ease-in forwards infinite alternate */
 }
 
+#p1-effect {
+    display: flex;
+    position: fixed;
+    top: 250px;
+    width: 150px;
+    opacity: 0;
+}
+
+#p1-sprite-points {
+    color: white;
+    display: flex;
+    position: fixed;
+    left: 255px;
+    top: 315px;
+    width: 150px;
+    opacity: 0;
+    font-size: 20px;;
+    font-weight: 900;
+    font-family: 'Gowun Batang', serif;
+    
+}
+#p2-sprite-points {
+    color: white;
+    display: flex;
+    position: fixed;
+    right: 200px; 
+    top: 315px;
+    width: 150px;
+    opacity: 0;
+    font-size: 20px;;
+    font-weight: 900;
+    font-family: 'Gowun Batang', serif;
+    
+}
+
+#p2-effect {
+    position: fixed;
+    top: 250px;
+    padding: 0px 35px;
+    width: 150px;
+    opacity: 0;
+}
+
 img.p2-sprite {
     display: flex;
     width: 230px;
     position: fixed;
-    /* left: 150px; */
     top: 87px;
     right: 200px;
     transform: scaleX(-1);
@@ -63,6 +105,7 @@ img.p2-sprite {
     border-style: groove;
     width: 400px;
     justify-content: space-between;
+    opacity: 0.8;
     
 }
 
@@ -143,13 +186,138 @@ img.p2-sprite {
 }
 
 /* animations */ 
-@keyframes attack-right { 
+@keyframes p1-attack { 
     0% {transform: translateX(0%);
-        .p1-sprite.src = 'gifs/Martial-Hero-run.gif'}
+        content: url('../gifs/Martial-Hero-run.gif')}
     50% {transform: translateX(50%);
-        .p1-sprite.src = 'gifs/Martial-Hero-attack.gif': }
-    100% {transform: translateX(0%);}
+        content: url('../gifs/Martial-Hero-attack.gif')}
+    65% {
+        content: url('../gifs/Martial-Hero-fall.gif')}
+    100% {transform: translateX(0%)}
 }
+@keyframes p2-attack { 
+    0% {transform: translateX(-1);
+        content: url('../gifs/Wizard-attack1.gif')}
+    50% {transform: translateX(-1,);
+        transform: translateX(-50%);
+        content: url('../gifs/Wizard-attack1.gif')}
+    65% {
+        content: url('../gifs/Wizard-attack1.gif')}
+    100% {transform: translateX(-1)}
+}
+
+@keyframes p1-spell { 
+    0% {content: url('../gifs/Martial-Hero-fall.gif');
+        transform: translateY(0%)}
+    50%{transform: translateY(-30%);}
+    80%{transform: translateY(-30%);
+        content: url('../gifs/Martial-Hero-fall.gif')}
+    100% {content: url('../gifs/Martial-Hero-fall.gif');
+        transform: translateY(0%)}
+}
+@keyframes p2-spell { 
+    0% {content: url('../gifs/Wizard-fall.gif');
+        transform: translateY(0%)}
+    50%{transform: translateY(-30%);}
+    80%{transform: translateY(-30%);
+        content: url('../gifs/Wizard-fall.gif')}
+    100% {content: url('../gifs/Wizard-fall.gif');
+        transform: translateY(0%)}
+}
+
+@keyframes p1-heal { 
+    0% {content: url('../gifs/Martial-Hero-dead.gif')}
+    100% {content: url('../gifs/Martial-Hero-dead.gif');}
+}
+@keyframes p2-heal { 
+    0% {content: url('../gifs/Wizard-jump.gif')}
+    100% {content: url('../gifs/Wizard-jump.gif');}
+}
+
+@keyframes p1-spell-effect{ 
+    0% {content: url('../gifs/ManaFlare.gif');
+        transform: translateY(0%);
+        opacity: 0;}
+    50%{transform: translateY(-60%);
+        opacity: 1;}
+    80%{transform: translateY(-60%);
+        content: url('../gifs/ManaFlare.gif')}
+    100% {content: url('../gifs/ManaFlare.gif');
+        transform: translateY(0%);
+        opacity: 0;}
+}
+
+@keyframes p1-heal-effect{ 
+    0% {content: url('../gifs/Heal.gif');
+    opacity: 1;}
+    100% {content: url('../gifs/Heal.gif');
+    opacity: 1;}
+}
+@keyframes p2-heal-effect{ 
+    0% {content: url('../gifs/Heal.gif');
+    opacity: 1;}
+    100% {content: url('../gifs/Heal.gif');
+    opacity: 1;}
+}
+
+@keyframes p1-hp-points-up {
+    0% {transform:translateY(0%);
+    opacity: 0}
+    25% {opacity: 1;}
+    75% {opacity: 1;}
+    100% {transform:translateY(-350%);
+        opacity: 0}
+}
+
+@keyframes p1-hp-points-down {
+    0% {transform:translateY(0%);
+        color: red;
+        opacity: 0}
+    25% {opacity: 1;}
+    75% {opacity: 1;}
+    100% {transform:translateY(-350%);
+        color: red;
+        opacity: 0}
+}
+@keyframes p2-hp-points-down {
+    0% {transform:translateY(0%);
+        color: red;
+        opacity: 0}
+    25% {opacity: 1;}
+    75% {opacity: 1;}
+    100% {transform:translateY(-350%);
+        color: red;
+        opacity: 0}
+}
+
+@keyframes p2-hp-points-up {
+    0% {transform:translateY(0%);
+    opacity: 0}
+    25% {opacity: 1;}
+    75% {opacity: 1;}
+    100% {transform:translateY(-350%);
+        opacity: 0}
+}
+
+@keyframes p1-struck {
+    100% {content: url('../gifs/Martial-Hero-take-hit-flash.gif');}
+}
+
+@keyframes p1-death {
+    0% {content: url('../gifs/Martial-Hero-death.gif');}
+    100% {content: url('../gifs/Martial-Hero-dead.gif');}
+}
+
+@keyframes p2-struck {
+    0% {animation-duration: 5s;} /* why isn't this working? */
+    100% {content: url('../gifs/Wizard-struck.gif');}
+}
+
+@keyframes p2-death {
+    100% {content: url('../gifs/Wizard-death.gif');}
+}
+
+
 
 /* look up display:none or visibility options */
 
