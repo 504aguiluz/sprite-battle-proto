@@ -40,6 +40,7 @@ body {
 /* sprites */
 img.p1-sprite {
     /* display: flex; */
+    background-color: transparent;
     position: fixed;
     width: 400px;
     top: 272px;
@@ -48,6 +49,7 @@ img.p1-sprite {
 
 img.p2-sprite {
     /* display: flex; */
+    background-color: transparent;
     width: 230px;
     position: fixed;
     top: 207px;
@@ -216,7 +218,8 @@ img.p2-sprite {
 @keyframes p1-spell { 
     0% {content: url('../gifs/Martial-Hero-fall.gif');
         transform: translateY(0%)}
-    50%{transform: translateY(-30%);}
+    50%{transform: translateY(-30%);
+}
     80%{transform: translateY(-30%);
         content: url('../gifs/Martial-Hero-fall.gif')}
     100% {content: url('../gifs/Martial-Hero-fall.gif');

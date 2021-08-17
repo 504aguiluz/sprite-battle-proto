@@ -7,7 +7,7 @@ class Sprite {
         this.name = name
         this.type = ['fighter', 'mage'] //stretch: buff stats based on type
         this.level = 1 //stretch: level up to affect stats 
-        this.turn = 'p2'
+        this.turn = 'p1'
         this.fightDmg = 5
         this.fightCrit = this.fightDmg * 2
         this.spellDmg = 7
@@ -51,7 +51,6 @@ class Sprite {
     fight(player, opponent, status = 'hit'){
         player.rollD20(1, 'attack roll')
         if((this.d20 >= opponent.ac) && this.d20 !== 20){
-            console.log(`${player.name} attacked ${opponent.name} for ${player.fightDmg} damage!`)
             opponent.currentHp -= player.fightDmg
             player.sprite1Points.innerHTML = `-${player.fightDmg}`
             player.sprite2Points.innerHTML = `-${player.fightDmg}`
@@ -59,12 +58,10 @@ class Sprite {
         } if (this.d20 === 20){
             status = 'crit'
             opponent.currentHp -= player.fightCrit
-            console.log(`${player.name} made a critical attack on ${opponent.name} for ${player.fightCrit} damage!`)
             player.sprite1Points.innerHTML = `critical hit!\n-${player.fightCrit}`
             player.sprite2Points.innerHTML = `critical hit!\n-${player.fightCrit}`
             this.fightAnimation(player, status)
         } else if (this.d20 < opponent.ac) {
-            console.log(`${player.name} missed!`)
             status = 'miss'
             this.fightAnimation(player, status)
         }
@@ -79,20 +76,15 @@ class Sprite {
             player.sprite1Points.innerHTML = `-${player.spellDmg}`
             player.sprite2Points.innerHTML = `-${player.spellDmg}`
             player.currentMp -= 5
-            // convert console logs to messages in pop-ups
-            console.log(`${player.name} cast spell ${opponent.name} for ${player.spellDmg} damage!`)
             this.spellAnimation(player, status)
         } if (this.d20 === 20){
             status = 'crit'
             opponent.currentHp -= player.spellCrit
             player.sprite1Points.innerHTML = `critical hit!\n-${player.spellCrit}`
             player.sprite2Points.innerHTML = `critical hit!\n-${player.spellCrit}`
-            console.log(`${player.name} made a critical spell attack on ${opponent.name} for ${player.spellCrit} damage!`)
             player.sprite1Effect
             this.spellAnimation(player, status)
         } else if (this.d20 < opponent.ac) {
-            // vvv comment out when finished vvv
-            console.log(`${player.name} spell missed!`)
             status = 'miss'
             this.spellAnimation(player, status)
         }
@@ -104,10 +96,7 @@ class Sprite {
         player.currentHp += this.d8*2
         player.sprite1Points.innerHTML = `+${this.d8*2}`
         player.sprite2Points.innerHTML = `+${this.d8*2}`
-        // convert console logs to messages in pop-ups and reflect status bars
-        console.log(`${player.name} is healed! + ${this.d8*2}`)
-        console.log(`p1 HP: ${player1.currentHp}\np1 MP: ${player1.currentMp}`)
-        console.log(`p2 HP: ${player2.currentHp}\np2 MP: ${player2.currentMp}`)
+        player.currentMp -= 5
         this.healAnimation()
         this.updateStats()
     }
