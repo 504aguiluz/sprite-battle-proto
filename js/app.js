@@ -221,11 +221,18 @@ class Sprite {
 
     toggleBattleMenus (){
         if (this.turn === 'p1'){
-
+                this.p1BattleMenu.disabled = false
+                this.p2BattleMenu.disabled = true
+                this.p2BattleMenu.style.visibility = 'hidden'
+            for (let i = 0; i < this.p2BattleMenuNodes.length; i++){
+                this.p1BattleMenuNodes[i].disabled = false
+                this.p2BattleMenuNodes[i].disabled = true
+                console.log(this.p2BattleMenuNodes)
+            }
         } if (this.turn === 'p2'){
-            this.p2BattleMenu.disabled = false
-            this.p1BattleMenu.disabled = true
-            this.p1BattleMenu.style.visibility = 'hidden'
+                this.p2BattleMenu.disabled = false
+                this.p1BattleMenu.disabled = true
+                this.p1BattleMenu.style.visibility = 'hidden'
             for (let i = 0; i < this.p1BattleMenuNodes.length; i++){
                 this.p2BattleMenuNodes[i].disabled = false
                 this.p1BattleMenuNodes[i].disabled = true
