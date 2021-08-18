@@ -100,6 +100,32 @@ body {
     font-family: 'Josefin Sans', sans-serif;
 }
 
+#announce-bar {
+    position: absolute;
+    z-index: 2;
+    top: 10%;
+    width: 90%;
+    max-width: 900px;
+    margin-left: 35%;
+    opacity: 1;
+    width: -moz-fit-content;
+    width: fit-content;
+    padding: 40px 100px 40px 100px;
+    /* center the element */
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 20px;;
+    font-family: 'Gowun Batang', serif;
+    color: white;
+    font-weight: 700;
+    opacity: 0;
+    
+}
+
+
+
 /* battle and stat menus */
 .footer {
     display:flex;
@@ -124,7 +150,6 @@ body {
 
 #p1-container {
     flex-direction: row-reverse;
-    
 }
 
 #p2-container {
@@ -198,6 +223,13 @@ body {
 }
 
 /* animations */ 
+@keyframes announce {
+    0% {opacity: 0;}
+    25% {opacity: 0.8;}
+    75% {opacity: 0.8;}
+    100% {opacity: 0;}
+}
+
 @keyframes p1-attack { 
     0% {transform: translateX(0%);
         content: url('../gifs/Martial-Hero-run.gif')}
@@ -360,8 +392,8 @@ body {
 }
 
 @keyframes p2-death {
-    0% {content: url('../gifs/Martial-Hero-death.gif');}
-    100% {content: url('../gifs/Wizard-death.gif');}
+    0% {content: url('../gifs/Wizard-death.gif');}
+    100% {content: url('../gifs/Wizard-dead.gif');}
 }
 
 

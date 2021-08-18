@@ -1,11 +1,12 @@
 console.log('SPRITE BATTLE')
 
 const hipHop4 = document.getElementById('hip-hop4')
+const announceBar = document.getElementById('announce-bar')
 
 class Sprite {
-    constructor (name) {
+    constructor (name, type) {
         this.name = name
-        this.type = ['fighter', 'mage'] //stretch: buff stats based on type
+        this.type = type //stretch: buff stats based on type
         this.level = 1 //stretch: level up to affect stats 
         this.turn = 'p2'
         this.fightDmg = 5
@@ -46,10 +47,12 @@ class Sprite {
     }
 
     updateStats(){
+        this.minMaxStats()
         this.p1HP.innerHTML = `${player1.currentHp}/ ${player1.maxHp}`
         this.p2HP.innerHTML = `${player2.currentHp}/ ${player2.maxHp}`
         this.p1MP.innerHTML = `${player1.currentMp}/ ${player1.maxMp}`
         this.p2MP.innerHTML = `${player2.currentMp}/ ${player2.maxMp}`
+        this.checkDeath()
     }
 
     fight(player, opponent, status = 'hit'){
@@ -76,22 +79,24 @@ class Sprite {
     spell(player, opponent, status = 'hit'){
         player.rollD20(1, 'spell attack roll')
         console.log(`d20 roll: ${this.d20}`)
-        if(this.d20 >= opponent.ac && this.d20 !== 20){
+        if(this.d20 >= opponent.ac && this.d20 !== 20 && player.currentMp > 0){
             opponent.currentHp -= player.spellDmg
             player.sprite1Points.innerHTML = `-${player.spellDmg}`
             player.sprite2Points.innerHTML = `-${player.spellDmg}`
             player.currentMp -= 5
             this.spellAnimation(player, status)
-        } if (this.d20 === 20){
+        } if (this.d20 === 20 && player.currentMp > 0){
             status = 'crit'
             opponent.currentHp -= player.spellCrit
             player.sprite1Points.innerHTML = `critical hit!\n-${player.spellCrit}`
             player.sprite2Points.innerHTML = `critical hit!\n-${player.spellCrit}`
             player.sprite1Effect
             this.spellAnimation(player, status)
-        } else if (this.d20 < opponent.ac) {
+        } if (this.d20 < opponent.ac) {
             status = 'miss'
             this.spellAnimation(player, status)
+        } if (player.currentMp <= 0) {
+            this.announceSomething(`Not enough MP!`)
         }
         this.updateStats()
     }
@@ -175,13 +180,6 @@ class Sprite {
             // this.turn = 'p1'
         }
         this.struckAnimation(status)
-        if(player1.currentHp <= 0) {
-            this.sprite2.style.animation = "p1-death 500ms"
-            this.sprite1.src = "../gifs/Martial-Hero-dead.gif"
-        } if (player2.currentHp <= 0) {
-            this.sprite2.style.animation = "p2-death 2s"
-            // this.sprite2.src = "../gifs/Wizard-death.gif"
-        }
         // hipHop4.play()
     }
     
@@ -224,30 +222,56 @@ class Sprite {
                 this.p1BattleMenu.disabled = false
                 this.p2BattleMenu.disabled = true
                 this.p2BattleMenu.style.visibility = 'hidden'
-            for (let i = 0; i < this.p2BattleMenuNodes.length; i++){
-                this.p1BattleMenuNodes[i].disabled = false
-                this.p2BattleMenuNodes[i].disabled = true
-                console.log(this.p2BattleMenuNodes)
-            }
         } if (this.turn === 'p2'){
                 this.p2BattleMenu.disabled = false
                 this.p1BattleMenu.disabled = true
                 this.p1BattleMenu.style.visibility = 'hidden'
-            for (let i = 0; i < this.p1BattleMenuNodes.length; i++){
-                this.p2BattleMenuNodes[i].disabled = false
-                this.p1BattleMenuNodes[i].disabled = true
-                console.log(this.p1BattleMenuNodes)
-            }
+        } if (player1.currentHp <= 0 || player2.currentHp <= 0){
+            this.p1BattleMenu.style.visibility = 'hidden'
+            this.p2BattleMenu.style.visibility = 'hidden'
         }
+    }
+    minMaxStats(){ //DRY THIS CODE!!! WTF?
+        if (player1.currentHp <= 0){
+            player1.currentHp = 0
+        } if (player1.currentHp >= player1.maxHp) {
+            player1.currentHp = player1.maxHp
+        } if (player1.currentMp <= 0) {
+            player1.currentMp = 0
+        } if (player1.currentMp >= player1.maxMp) {
+            player1.currentMp = player1.maxMp
+        } if (player2.currentHp <= 0){
+            player2.currentHp = 0
+        } if (player2.currentHp >= player2.maxHp) {
+            player2.currentHp = player2.maxHp
+        } if (player2.currentMp <= 0) {
+            player2.currentMp = 0
+        } if (player2.currentMp >= player2.maxMp) {
+            player2.currentMp = player2.maxMp
+        }
+    }
+    checkDeath(){
+        if(player1.currentHp <= 0) {
+            this.sprite2.style.animation = "p1-death 500ms"
+            this.announceSomething(`${player1.name} the ${player1.type} has been defeated!`)
+            this.sprite1.src = "../gifs/Martial-Hero-dead.gif"
+        } if (player2.currentHp <= 0) {
+            this.sprite2.style.animation = "p2-death 2s"
+            this.sprite2.src = "../gifs/Wizard-dead.gif"
+            this.announceSomething(`${player2.name} the ${player2.type} has been defeated!`)
+        }
+        this.toggleBattleMenus()
+    }
+    announceSomething (text){
+        announceBar.innerHTML = text
+        announceBar.style.animation = "announce 4s"
     }
 }
 
 
 //instantiate players
-const player1 = new Sprite ('player1')
-const player2 = new Sprite ('player2')
-// player2.randomizeInit()
-// player1.disableP1()
+const player1 = new Sprite ('Musashi', 'warrior')
+const player2 = new Sprite ('Merlin', 'cleric')
 
 function introSequence(){
     
