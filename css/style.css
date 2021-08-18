@@ -38,7 +38,7 @@ body {
 }
 
 /* sprites */
-img.p1-sprite {
+#p1-sprite {
     /* display: flex; */
     background-color: transparent;
     position: fixed;
@@ -47,7 +47,7 @@ img.p1-sprite {
     left: 200px;
 }
 
-img.p2-sprite {
+#p2-sprite {
     /* display: flex; */
     background-color: transparent;
     width: 230px;
@@ -61,6 +61,15 @@ img.p2-sprite {
     display: flex;
     position: fixed;
     top: 370px;
+    left: 200px;
+    width: 150px;
+    opacity: 0;
+}
+
+#p2-effect {
+    position: fixed;
+    top: 350px;
+    right: 230px;
     width: 150px;
     opacity: 0;
 }
@@ -91,14 +100,6 @@ img.p2-sprite {
     font-family: 'Josefin Sans', sans-serif;
 }
 
-#p2-effect {
-    position: fixed;
-    top: 350px;
-    padding: 0px 35px;
-    width: 150px;
-    opacity: 0;
-}
-
 /* battle and stat menus */
 .footer {
     display:flex;
@@ -112,6 +113,7 @@ img.p2-sprite {
 .player-containers {
     display: flex;
     border: solid 5px white;
+    background-color: rgb(78, 78, 255);
     border-radius: 10px;
     border-style: groove;
     width: 400px;

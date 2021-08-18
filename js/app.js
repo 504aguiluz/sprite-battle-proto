@@ -7,7 +7,7 @@ class Sprite {
         this.name = name
         this.type = ['fighter', 'mage'] //stretch: buff stats based on type
         this.level = 1 //stretch: level up to affect stats 
-        this.turn = 'p1'
+        this.turn = 'p2'
         this.fightDmg = 5
         this.fightCrit = this.fightDmg * 2
         this.spellDmg = 7
@@ -19,8 +19,8 @@ class Sprite {
         this.ac = 5
         this.d20 = 0
         this.d8 = 0
-        this.sprite1 = document.querySelector('.p1-sprite')
-        this.sprite2 = document.querySelector('.p2-sprite')
+        this.sprite1 = document.querySelector('#p1-sprite')
+        this.sprite2 = document.querySelector('#p2-sprite')
         this.sprite1Effect = document.querySelector('#p1-effect')
         this.sprite2Effect = document.querySelector('#p2-effect')
         this.sprite1Points = document.querySelector('#p1-sprite-points')
@@ -29,6 +29,10 @@ class Sprite {
         this.p2HP = document.getElementById('p2-HP')
         this.p1MP = document.getElementById('p1-MP')
         this.p2MP = document.getElementById('p2-MP')
+        this.p1BattleMenuNodes = document.getElementById('p1-battle-menu').getElementsByTagName('*')
+        this.p1BattleMenu = document.getElementById('p1-battle-menu')
+        this.p2BattleMenuNodes = document.getElementById('p2-battle-menu').getElementsByTagName('*')
+        this.p2BattleMenu = document.getElementById('p2-battle-menu')
         this.weapon = ['sword', 'axe', 'staff'] //to add: modifies fightDmg and spellDmg
     }
     rollD20(num = 1, rollType = ''){
@@ -49,6 +53,7 @@ class Sprite {
     }
 
     fight(player, opponent, status = 'hit'){
+        this.toggleBattleMenus()
         player.rollD20(1, 'attack roll')
         if((this.d20 >= opponent.ac) && this.d20 !== 20){
             opponent.currentHp -= player.fightDmg
@@ -116,6 +121,7 @@ class Sprite {
                 this.sprite1.style.animation = "p1-attack 2s"
                 this.sprite2Points.style.animation = "p2-hp-points-down 2s"
             }
+            // this.turn = 'p2'
         } if (this.turn === 'p2') {
             if (status == 'hit'){
                 this.sprite2.style.animation = "p2-attack 2s"
@@ -130,6 +136,7 @@ class Sprite {
                 this.sprite2.style.animation = "p2-attack 2s"
                 this.sprite1Points.style.animation = "p1-hp-points-down 2s"
             }
+            // this.turn = 'p1'
         }
         this.struckAnimation(status)
         // hipHop4.play()
@@ -151,6 +158,7 @@ class Sprite {
                 this.sprite1Effect.style.animation = "p1-spell-effect 2s ease-in"
                 this.sprite2Points.style.animation = "p2-hp-points-down 2s"
             }
+            // this.turn = 'p2'
         } if (this.turn === 'p2') {
             this.sprite2.style.animation = "p2-spell 2s"
             this.sprite2Effect.style.animation = "p1-spell-effect 2s ease-in"
@@ -164,6 +172,7 @@ class Sprite {
                 this.sprite2.style.animation = "p2-spell 2s"
                 this.sprite1Points.style.animation = "p1-hp-points-down 2s"
             }
+            // this.turn = 'p1'
         }
         this.struckAnimation(status)
         if(player1.currentHp <= 0) {
@@ -187,7 +196,8 @@ class Sprite {
             this.sprite2Points.style.animation = "p2-hp-points-up 2s"
             }
             // hipHop4.play()
-        }
+    }
+    
     struckAnimation (status) {
         if (status == 'hit' || status == 'crit'){
             if (this.turn == 'p2') {
@@ -198,12 +208,39 @@ class Sprite {
             }
          }
     }
+    
+    randomizeInit(){
+        this.randomInit = Math.ceil(Math.random()*2)
+        if (this.randomInit === 1) {
+            this.turn = 'p1'
+        } if (this.randomInit === 2) {
+            this.turn = 'p2'
+        }
+        console.log(this.turn)
+    }
+
+    toggleBattleMenus (){
+        if (this.turn === 'p1'){
+
+        } if (this.turn === 'p2'){
+            this.p2BattleMenu.disabled = false
+            this.p1BattleMenu.disabled = true
+            this.p1BattleMenu.style.visibility = 'hidden'
+            for (let i = 0; i < this.p1BattleMenuNodes.length; i++){
+                this.p2BattleMenuNodes[i].disabled = false
+                this.p1BattleMenuNodes[i].disabled = true
+                console.log(this.p1BattleMenuNodes)
+            }
+        }
+    }
 }
+
 
 //instantiate players
 const player1 = new Sprite ('player1')
 const player2 = new Sprite ('player2')
-
+// player2.randomizeInit()
+// player1.disableP1()
 
 function introSequence(){
     
@@ -248,7 +285,8 @@ document.getElementById('p1-heal-button').addEventListener('click', ()=>{player1
 document.getElementById('p2-fight-button').addEventListener('click', ()=>{player2.fight(player2, player1)}, ()=>{player2.fightAnimation()} )
 document.getElementById('p2-spell-button').addEventListener('click', ()=>{player2.spell(player2, player1)}, ()=>{player2.spellAnimation()} )
 document.getElementById('p2-heal-button').addEventListener('click', ()=>{player2.heal(player2), ()=>{player2.healAnimation()} })
-document.getElementById('test-button').addEventListener('click', ()=>{console.log('test button')})
+document.getElementById('test-button').addEventListener('click', ()=>{player1.randomInit()})
+
 
 
 
@@ -269,7 +307,10 @@ document.getElementById('test-button').addEventListener('click', ()=>{console.lo
 //     background-image: url('http://freedomwallpaper.com/wallpaper2/funky-wallpaper-hd.jpg');
 // }
 
-
+// // This will disable all the children of the div
+// var nodes = document.getElementById("dcalc").getElementsByTagName('*');
+// for(var i = 0; i < nodes.length; i++){
+//      nodes[i].disabled = true
 
 
 
