@@ -1,6 +1,20 @@
 console.log('SPRITE BATTLE')
-
+// mp3s
+// https://www.w3schools.com/jsref/prop_audio_volume.asp
 const hipHop4 = document.getElementById('hip-hop4')
+const deathSFX = document.getElementById('death-sfx')
+const swordHitSFX = document.getElementById('sword-hit-sfx')
+const swordCritSFX = document.getElementById('sword-crit-sfx')
+const swordMissSFX = document.getElementById('sword-miss-sfx')
+const swordDramaSFX = document.getElementById('sword-drama-sfx')
+const explosionSFX = document.getElementById('explosion-sfx')
+const frostbiteSFX = document.getElementById('frostbite-sfx')
+const heal1SFX = document.getElementById('heal1-sfx')
+const heal2SFX = document.getElementById('heal2-sfx')
+
+
+
+
 const announceBar = document.getElementById('announce-bar')
 const bkgImg = document.getElementById('bkg-img')
 const playerArr = ['p1', 'p2']
@@ -10,6 +24,8 @@ const randomPlayer = (value)=>{
 }
 let turn = randomPlayer(playerArr)
 console.log(turn)
+
+
 
 class Sprite {
     constructor (name, type) {
@@ -121,28 +137,33 @@ class Sprite {
     fightAnimation(player, status){
         if (turn === 'p1') {
             if (status == 'hit'){
+                swordHitSFX.play()
                 this.sprite1.style.animation = "p1-attack 2s"
                 this.sprite2Points.style.animation = "p2-hp-points-down 2s"
             } else if (status == 'crit'){
+                swordCritSFX.play()
                 this.sprite1.style.animation = "p1-attack 2s"
                 this.sprite2Points.style.animation = "p2-hp-points-down 2s"
                 this.sprite2Effect.style.animation = "p2-crit-struck 1s"
             } else if (status == 'miss'){
+                swordMissSFX.play()
                 player.sprite1Points.innerHTML = 'missed'
                 player.sprite2Points.innerHTML = 'missed'
                 this.sprite1.style.animation = "p1-attack 2s"
                 this.sprite2Points.style.animation = "p2-hp-points-down 2s"
             }
-            // turn = 'p2'
         } else if (turn === 'p2') {
             if (status == 'hit'){
+                swordDramaSFX.play()
                 this.sprite2.style.animation = "p2-attack 2s"
                 this.sprite1Points.style.animation = "p1-hp-points-down 2s"
             } else if (status == 'crit'){
+                swordDramaSFX.play()
                 this.sprite2.style.animation = "p2-attack 2s"
                 this.sprite1Points.style.animation = "p1-hp-points-down 2s"
                 this.sprite1Effect.style.animation = "p1-crit-struck 1s"
             } else if (status == 'miss'){
+                swordMissSFX.play()
                 player.sprite2Points.innerHTML = 'missed'
                 player.sprite1Points.innerHTML = 'missed'
                 this.sprite2.style.animation = "p2-attack 2s"
@@ -157,6 +178,7 @@ class Sprite {
         console.log(status, 'status')
         if (turn === 'p1') {
             this.announceSomething('Fireball', '2s')
+            explosionSFX.play()
             if (status == 'hit'){
                 this.sprite1.style.animation = "p1-spell 2s"
                 this.sprite1Effect.style.animation = "p1-spell-effect 2s ease-in"
@@ -171,6 +193,7 @@ class Sprite {
                 this.sprite2Points.style.animation = "p2-hp-points-down 2s"
             } 
         } else if (turn === 'p2') {
+            frostbiteSFX.play()
             this.announceSomething('Frostbite', '2s')
             this.sprite2.style.animation = "p2-spell 2s"
             this.sprite2Effect.style.animation = "p1-spell-effect 2s ease-in"
@@ -191,10 +214,12 @@ class Sprite {
     
     healAnimation () {
         if (turn === 'p1') {
+            heal1SFX.play()
             this.sprite1.style.animation = "p1-heal 2s ease-in"
             this.sprite1Effect.style.animation = "p1-heal-effect 1s ease-in"
             this.sprite1Points.style.animation = "p1-hp-points-up 2s"
         } else if (turn === 'p2') {
+            heal1SFX.play()
             this.sprite2.style.animation = "p2-heal 2s ease-in"
             this.sprite2Effect.style.animation = "p2-heal-effect 2s ease-in"
             this.sprite2Points.style.animation = "p2-hp-points-up 2s"
@@ -257,10 +282,12 @@ class Sprite {
     }
     checkDeath(){
         if(player1.currentHp <= 0) {
+            deathSFX.play()
             this.sprite1.style.animation = "p1-death 500ms"
             this.announceSomething(`${player1.name} the ${player1.type} has been defeated!`)
             this.sprite1.src = "../gifs/Martial-Hero-dead.gif"
         } if (player2.currentHp <= 0) {
+            deathSFX.play()
             this.sprite2.style.animation = "p2-death 2s"
             this.sprite2.src = "../gifs/Wizard-dead.gif"
             this.announceSomething(`${player2.name} the ${player2.type} has been defeated!`)
