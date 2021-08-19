@@ -54,7 +54,6 @@ body {
     position: fixed;
     top: 207px;
     right: 200px;
-    transform: scaleX(-1);
 }
 
 #p1-effect {
@@ -116,7 +115,7 @@ body {
     left: 0;
     margin-right: auto;
     margin-left: auto;
-    font-size: 20px;;
+    font-size: 27px;;
     font-family: 'Gowun Batang', serif;
     color: white;
     font-weight: 700;
@@ -241,11 +240,11 @@ body {
 }
 @keyframes p2-attack { 
     0% {transform: translate(0);
-        content: url('../gifs/Wizard-attack.gif')}
-    50% {transform: translate(-100%);
-        content: url('../gifs/Wizard-attack.gif')}
+        content: url('../gifs/Wizard-run-left.gif')}
+    50% {transform: translate(-240%);
+        content: url('../gifs/Wizard-jump.gif')}
     65% {
-        content: url('../gifs/Wizard-attack.gif')}
+        content: url('../gifs/Wizard-fall-left.gif')}
     100% {transform: translate(0)}
 }
 
@@ -274,8 +273,8 @@ body {
     100% {content: url('../gifs/Martial-Hero-dead.gif');}
 }
 @keyframes p2-heal { 
-    0% {content: url('../gifs/Wizard-fall.gif')}
-    100% {content: url('../gifs/Wizard-fall.gif');}
+    0% {content: url('../gifs/Wizard-fall-left.gif')}
+    100% {content: url('../gifs/Wizard-fall-left.gif');}
 }
 
 @keyframes p1-spell-effect{ 
@@ -369,11 +368,11 @@ body {
 }
 
 @keyframes p1-spell-struck {
-    0% {content: url('../gifs/Explosion.gif');
+    0% {content: url('../gifs/Implode.gif');
         opacity: 0}
         25% {opacity: 0.7;}
         75% {opacity: 0.7;}
-        100% {content: url('../gifs/Explosion.gif');
+        100% {content: url('../gifs/Implode.gif');
             opacity: 1}
 }            
 
