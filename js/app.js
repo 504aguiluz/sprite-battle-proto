@@ -1,7 +1,7 @@
 console.log('SPRITE BATTLE')
 // mp3s
 // https://www.w3schools.com/jsref/prop_audio_volume.asp
-const hipHop4 = document.getElementById('hip-hop4')
+const hipHop4 = document.getElementById('hip-hop7')
 const deathSFX = document.getElementById('death-sfx')
 const swordHitSFX = document.getElementById('sword-hit-sfx')
 const swordCritSFX = document.getElementById('sword-crit-sfx')
@@ -12,11 +12,13 @@ const frostbiteSFX = document.getElementById('frostbite-sfx')
 const heal1SFX = document.getElementById('heal1-sfx')
 const heal2SFX = document.getElementById('heal2-sfx')
 
-
-
-
+// visual element tags
 const announceBar = document.getElementById('announce-bar')
 const bkgImg = document.getElementById('bkg-img')
+const hideToggle = document.getElementsByClassName('hide')
+const playButton = document.getElementById('play-button')
+
+
 const playerArr = ['p1', 'p2']
 const randomPlayer = (value)=>{
     let item = value[Math.floor(Math.random()*value.length)]
@@ -81,20 +83,20 @@ class Sprite {
     fight(player, opponent, status = 'hit'){
         // this.toggleBattleMenus()
         player.rollD20(1, 'attack roll')
+        player.fightAnimation(player, status)
         if((this.d20 >= opponent.ac) && this.d20 !== 20){
             opponent.currentHp -= player.fightDmg
             player.sprite1Points.innerHTML = `-${player.fightDmg}`
             player.sprite2Points.innerHTML = `-${player.fightDmg}`
-            this.fightAnimation(player, status)
         } else if (this.d20 === 20){
             status = 'crit'
             opponent.currentHp -= player.fightCrit
             player.sprite1Points.innerHTML = `critical hit!\n-${player.fightCrit}`
             player.sprite2Points.innerHTML = `critical hit!\n-${player.fightCrit}`
-            this.fightAnimation(player, status)
+            // player.fightAnimation(player, status)
         } else if (this.d20 < opponent.ac) {
             status = 'miss'
-            this.fightAnimation(player, status)
+            // player.fightAnimation(player, status)
         }
         this.updateStats()
     }
@@ -102,14 +104,14 @@ class Sprite {
     spell(player, opponent, status = 'hit'){
         player.rollD20(1, 'spell attack roll')
         console.log(`d20 roll: ${this.d20}`)
+        player.spellAnimation(player, status)
         if(this.d20 >= opponent.ac && this.d20 !== 20 && player.currentMp > 0){
             opponent.currentHp -= player.spellDmg
             player.sprite1Points.innerHTML = `-${player.spellDmg}`
             player.sprite2Points.innerHTML = `-${player.spellDmg}`
             player.currentMp -= 5
-            this.spellAnimation(player, status)
         } else if (this.d20 === 20 && player.currentMp > 0){
-            this.spellAnimation(player, status)
+            player.spellAnimation(player, status)
             status = 'crit'
             opponent.currentHp -= player.spellCrit
             player.sprite1Points.innerHTML = `critical hit!\n-${player.spellCrit}`
@@ -117,9 +119,9 @@ class Sprite {
             player.sprite1Effect
         } else if (this.d20 < opponent.ac) {
             status = 'miss'
-            this.spellAnimation(player, status)
+            // player.spellAnimation(player, status)
         } else if (player.currentMp <= 0) {
-            this.announceSomething(`Not enough MP!`)
+            player.announceSomething(`Not enough MP!`)
         }
         this.updateStats()
     }
@@ -130,7 +132,7 @@ class Sprite {
         player.sprite1Points.innerHTML = `+${this.d8*2}`
         player.sprite2Points.innerHTML = `+${this.d8*2}`
         player.currentMp -= 5
-        this.healAnimation()
+        player.healAnimation()
         this.updateStats()
     }
 
@@ -138,39 +140,39 @@ class Sprite {
         if (turn === 'p1') {
             if (status == 'hit'){
                 swordHitSFX.play()
-                this.sprite1.style.animation = "p1-attack 2s"
-                this.sprite2Points.style.animation = "p2-hp-points-down 2s"
+                player.sprite2Points.style.animation = "p2-hp-points-down 2s"
+                player.sprite1.style.animation = "p1-attack 2s"
             } else if (status == 'crit'){
                 swordCritSFX.play()
-                this.sprite1.style.animation = "p1-attack 2s"
-                this.sprite2Points.style.animation = "p2-hp-points-down 2s"
-                this.sprite2Effect.style.animation = "p2-crit-struck 1s"
+                player.sprite2Points.style.animation = "p2-hp-points-down 2s"
+                player.sprite1.style.animation = "p1-attack 2s"
+                player.sprite2Effect.style.animation = "p2-crit-struck 1s"
             } else if (status == 'miss'){
                 swordMissSFX.play()
+                player.sprite2Points.style.animation = "p2-hp-points-down 2s"
                 player.sprite1Points.innerHTML = 'missed'
                 player.sprite2Points.innerHTML = 'missed'
-                this.sprite1.style.animation = "p1-attack 2s"
-                this.sprite2Points.style.animation = "p2-hp-points-down 2s"
+                player.sprite1.style.animation = "p1-attack 2s"
             }
         } else if (turn === 'p2') {
             if (status == 'hit'){
                 swordDramaSFX.play()
-                this.sprite2.style.animation = "p2-attack 2s"
-                this.sprite1Points.style.animation = "p1-hp-points-down 2s"
+                player.sprite1Points.style.animation = "p1-hp-points-down 2s"
+                player.sprite2.style.animation = "p2-attack 2s"
             } else if (status == 'crit'){
                 swordDramaSFX.play()
-                this.sprite2.style.animation = "p2-attack 2s"
-                this.sprite1Points.style.animation = "p1-hp-points-down 2s"
+                player.sprite1Points.style.animation = "p1-hp-points-down 2s"
+                player.sprite2.style.animation = "p2-attack 2s"
                 this.sprite1Effect.style.animation = "p1-crit-struck 1s"
             } else if (status == 'miss'){
                 swordMissSFX.play()
+                player.sprite1Points.style.animation = "p1-hp-points-down 2s"
                 player.sprite2Points.innerHTML = 'missed'
                 player.sprite1Points.innerHTML = 'missed'
-                this.sprite2.style.animation = "p2-attack 2s"
-                this.sprite1Points.style.animation = "p1-hp-points-down 2s"
+                player.sprite2.style.animation = "p2-attack 2s"
             }
         }
-        this.struckAnimation(status)
+        this.struckAnimation(player, status)
         // hipHop4.play()
     }
     
@@ -180,36 +182,35 @@ class Sprite {
             this.announceSomething('Fireball', '2s')
             explosionSFX.play()
             if (status == 'hit'){
-                this.sprite1.style.animation = "p1-spell 2s"
-                this.sprite1Effect.style.animation = "p1-spell-effect 2s ease-in"
-                this.sprite2Effect.style.animation = "p2-spell-struck 2s"
-                this.sprite2Points.style.animation = "p2-hp-points-down 2s"
-                this.struckAnimation(status)
+                player.sprite2Points.style.animation = "p2-hp-points-down 2s"
+                player.sprite1.style.animation = "p1-spell 2s"
+                player.sprite1Effect.style.animation = "p1-spell-effect 2s ease-in"
+                player.sprite2Effect.style.animation = "p2-spell-struck 2s"
+                player.struckAnimation(status)
             } else if (status == 'miss') {
+                player.sprite2Points.style.animation = "p2-hp-points-down 2s"
                 player.sprite1Points.innerHTML = 'missed'
                 player.sprite2Points.innerHTML = 'missed'
-                this.sprite1.style.animation = "p1-spell 2s"
-                this.sprite1Effect.style.animation = "p1-spell-effect 2s ease-in"
-                this.sprite2Points.style.animation = "p2-hp-points-down 2s"
+                player.sprite1.style.animation = "p1-spell 2s"
+                player.sprite1Effect.style.animation = "p1-spell-effect 2s ease-in"
             } 
         } else if (turn === 'p2') {
             frostbiteSFX.play()
-            this.announceSomething('Frostbite', '2s')
-            this.sprite2.style.animation = "p2-spell 2s"
-            this.sprite2Effect.style.animation = "p1-spell-effect 2s ease-in"
+            player.announceSomething('Frostbite', '2s')
+            player.sprite2.style.animation = "p2-spell 2s"
+            player.sprite2Effect.style.animation = "p1-spell-effect 2s ease-in"
             if (status == 'hit'){
-                this.sprite2.style.animation = "p2-spell 2s"
-                this.sprite1Points.style.animation = "p1-hp-points-down 2s"
-                this.sprite1Effect.style.animation = "p1-spell-struck 2s"
+                player.sprite2.style.animation = "p2-spell 2s"
+                player.sprite1Points.style.animation = "p1-hp-points-down 2s"
+                player.sprite1Effect.style.animation = "p1-spell-struck 2s"
             } else if (status == 'miss'){
                 player.sprite2Points.innerHTML = 'missed'
                 player.sprite1Points.innerHTML = 'missed'
-                this.sprite2.style.animation = "p2-spell 2s"
-                this.sprite1Points.style.animation = "p1-hp-points-down 2s"
+                player.sprite2.style.animation = "p2-spell 2s"
+                player.sprite1Points.style.animation = "p1-hp-points-down 2s"
             }
-            // turn = 'p1'
         }
-        this.struckAnimation(status)
+        this.struckAnimation(player, status)
     }
     
     healAnimation () {
@@ -227,12 +228,12 @@ class Sprite {
             // hipHop4.play()
     }
     
-    struckAnimation (status) {
+    struckAnimation (player, status) {
         if (status == 'hit' || status == 'crit'){
             if (turn == 'p2') {
-                this.sprite1.style.animation = "p1-struck 500ms"
+                player.sprite1.style.animation = "p1-struck 500ms"
             } else if (turn == 'p1') {
-                this.sprite2.style.animation = "p2-struck 500ms"
+                player.sprite2.style.animation = "p2-struck 500ms"
             }
          }
     }
@@ -261,7 +262,7 @@ class Sprite {
         }
         // this.switchTurn()
     }
-    minMaxStats(){ //DRY THIS CODE!!! WTF? [use this.blahblah instead to dry]
+    minMaxStats(){ //DRY THIS CODE!!! 
         if (player1.currentHp <= 0){
             player1.currentHp = 0
         } if (player1.currentHp >= player1.maxHp) {
@@ -282,22 +283,26 @@ class Sprite {
     }
     checkDeath(){
         if(player1.currentHp <= 0) {
+            announceBar.style.opacity = '0.9'
+            hipHop4.pause()
             deathSFX.play()
             this.sprite1.style.animation = "p1-death 500ms"
-            this.announceSomething(`${player1.name} the ${player1.type} has been defeated!`)
+            this.announceSomething(`${player1.name} the ${player1.type} has been defeated!`, '10s')
             this.sprite1.src = "../gifs/Martial-Hero-dead.gif"
+            this.fightAgain()
         } if (player2.currentHp <= 0) {
+            announceBar.style.opacity = '0.9'
+            hipHop4.pause()
             deathSFX.play()
             this.sprite2.style.animation = "p2-death 2s"
             this.sprite2.src = "../gifs/Wizard-dead.gif"
-            this.announceSomething(`${player2.name} the ${player2.type} has been defeated!`)
+            this.announceSomething(`${player2.name} the ${player2.type} has been defeated!`, '10s')
+            this.fightAgain()
         } else {
-        //     this.toggleBattleMenus()
             this.switchTurn()
-            console.log('switch')
         }
     }
-    announceSomething (text, duration = '4s'){
+    announceSomething (text, duration = '3s'){
         announceBar.innerHTML = text
         announceBar.style.animation = `announce ${duration}`
     }
@@ -307,8 +312,32 @@ class Sprite {
         } else if (turn === 'p2'){
             turn = 'p1'
         }
-        console.log(turn)
+        console.log(`${turn}'s turn`)
         this.toggleBattleMenus()
+    }
+    fightNow(){
+        this.refreshCharacters() // not working
+        announceBar.style.opacity = 0
+        playButton.style.opacity = 0
+        hipHop4.play()
+        changeVisibility(hideToggle, 'visible')
+        this.toggleBattleMenus()
+        if (turn == 'p1'){
+            bkgImg.src = '../img/snow-field.jpeg'
+        } else if (turn == 'p2'){
+            bkgImg.src = '../img/buddhist-volcano.png'
+        }
+    }
+    fightAgain(){
+        playButton.disabled = false
+        playButton.innerHTML = 'FIGHT AGAIN?'
+        playButton.style.opacity = 0.9
+    }
+    refreshCharacters(){
+        player1.currentHp = player1.maxHp
+        player2.currentHp = player2.maxHp
+        player1.currentMp = player1.maxMp
+        player2.currentMp = player2.maxMp
     }
 }
 
@@ -316,54 +345,35 @@ class Sprite {
 const player1 = new Sprite ('Musashi', 'warrior')
 const player2 = new Sprite ('Merlin', 'cleric')
 
+//global functions
+function introScreen(){
+    announceBar.style.opacity = 0.9
+    playButton.style.opacity = 0.9
+    changeVisibility(hideToggle, 'hidden')
+}
+
+function changeVisibility(element, visibility){
+    [].forEach.call(element, function (el) {el.style.visibility = visibility});
+}
+function changeOpacity(element, opacity){
+    [].forEach.call(element, function (el) {el.style.opacity = opacity});
+}
 
 // startBattle()
-player1.toggleBattleMenus()
 
-
-
-
-
-
-
-
-
-// function choosePlayerType(){
-//     const p1 = document.getElementById('#p1TypeMenu')
-//     const p2 = document.getElementById('#p2TypeMenu')
-//     const p1ChoiceText = p1.options[p1.selectedIndex].text
-//     const p2ChoiceText  = p2.options[p2.selectedIndex].text
-//     player1.type = p1ChoiceText
-//     player2.type = p2ChoiceText
-//     // const e = document.getElementById("elementId");
-//     // const value = e.options[e.selectedIndex].value;
-// }
-
-
-// function winSequence(){
-
-// }
-
-// initGame()
-
-// console log section
-
-
-// temp game conditionals
-// if(player1.currentHp <= 0) {
-//     this.sprite1.style.animation = "p1-death 2s ease-in"
-// } if (player2.currentHp <= 0) {
-//     this.sprite2.style.animation = "p2-death 2s ease-in"
-// }
 
 // event handlers
-document.getElementById('p1-fight-button').addEventListener('click', ()=>{player1.fight(player1, player2)}, ()=>{player1.fightAnimation()})
-document.getElementById('p1-spell-button').addEventListener('click', ()=>{player1.spell(player1, player2)}, ()=>{player1.spellAnimation()} )
-document.getElementById('p1-heal-button').addEventListener('click', ()=>{player1.heal(player1)}, ()=>{player1.healAnimation()} )
-document.getElementById('p2-fight-button').addEventListener('click', ()=>{player2.fight(player2, player1)}, ()=>{player2.fightAnimation()} )
-document.getElementById('p2-spell-button').addEventListener('click', ()=>{player2.spell(player2, player1)}, ()=>{player2.spellAnimation()} )
-document.getElementById('p2-heal-button').addEventListener('click', ()=>{player2.heal(player2), ()=>{player2.healAnimation()} })
-// document.getElementById('test-button').addEventListener('click', ()=>{player1.randomInit()})
+window.addEventListener('load', ()=>{
+    console.log('page has loaded check')
+    introScreen()
+})
+document.getElementById('p1-fight-button').addEventListener('click', ()=>{player1.fight(player1, player2)})
+document.getElementById('p1-spell-button').addEventListener('click', ()=>{player1.spell(player1, player2)})
+document.getElementById('p1-heal-button').addEventListener('click', ()=>{player1.heal(player1)})
+document.getElementById('p2-fight-button').addEventListener('click', ()=>{player2.fight(player2, player1)})
+document.getElementById('p2-spell-button').addEventListener('click', ()=>{player2.spell(player2, player1)})
+document.getElementById('p2-heal-button').addEventListener('click', ()=>{player2.heal(player2)})
+document.getElementById('play-button').addEventListener('click', ()=>{player1.fightNow()}, ()=>{console.log('play game')})
 
 // notes
 // https://stackoverflow.com/questions/31565045/toggle-background-image-html

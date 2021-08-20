@@ -19,6 +19,12 @@ body {
     background-size: cover;
     opacity: 1;
 }
+
+.hide {
+    /* opacity: 0; */
+    /* visibility: 'hidden'; */
+}
+
 #gameboard {
     display: flex;
     flex-wrap: wrap;
@@ -106,7 +112,6 @@ body {
     width: 90%;
     max-width: 900px;
     margin-left: 35%;
-    opacity: 1;
     width: -moz-fit-content;
     width: fit-content;
     padding: 40px 100px 40px 100px;
@@ -115,15 +120,13 @@ body {
     left: 0;
     margin-right: auto;
     margin-left: auto;
-    font-size: 27px;;
+    font-size: 27px;
     font-family: 'Gowun Batang', serif;
     color: white;
     font-weight: 700;
     opacity: 0;
     
 }
-
-
 
 /* battle and stat menus */
 .footer {
@@ -180,7 +183,6 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    
 }
 
 #p1-stats {
@@ -207,9 +209,23 @@ body {
     font-family: 'Gowun Batang', serif;
 }
 
-#test-button {
+.announce{
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#play-button {
     position: fixed;
-    left:  50%;
+    width: 125px;
+    font-family: 'Gowun Batang', serif;
+    color: white;
+    font-weight: 700;
+    padding: 5px;
+    margin: 250px 0px 0px 500px;
+    font-size: 20px;
+    opacity: 0;
 }
 
 #p1-stats-nums {
@@ -223,7 +239,7 @@ body {
 
 /* animations */ 
 @keyframes announce {
-    0% {opacity: 0;}
+    2% {opacity: 0;}
     25% {opacity: 0.8;}
     75% {opacity: 0.8;}
     100% {opacity: 0;}
@@ -278,7 +294,7 @@ body {
 }
 
 @keyframes p1-spell-effect{ 
-    0% {content: url('../gifs/ManaFlare.gif');
+    5% {content: url('../gifs/ManaFlare.gif');
         transform: translateY(0%);
         opacity: 0;}
     50%{transform: translateY(-60%);
@@ -291,13 +307,13 @@ body {
 }
 
 @keyframes p1-heal-effect{ 
-    0% {content: url('../gifs/Heal.gif');
+    5% {content: url('../gifs/Heal.gif');
     opacity: 0.7;}
     100% {content: url('../gifs/Heal.gif');
     opacity: 1;}
 }
 @keyframes p2-heal-effect{ 
-    0% {content: url('../gifs/Heal.gif');
+    5% {content: url('../gifs/Heal.gif');
     opacity: 0.7;}
     90% {opacity: 0.7;}
     100% { opacity: 1;
@@ -305,8 +321,7 @@ body {
 }
 
 @keyframes p1-hp-points-up {
-    0% {transform:translateY(0%);
-        opacity: 0}
+    8% {transform:translateY(0%)}
     25% {opacity: 1;}
     75% {opacity: 1;}
     100%{transform:translateY(-350%);
@@ -315,8 +330,7 @@ body {
 }
 
 @keyframes p1-hp-points-down {
-    0% {transform:translateY(0%);
-        opacity: 0}
+    8% {transform:translateY(0%)}
     25% {opacity: 1;}
     75% {opacity: 1;}
     100% {transform:translateY(-350%);
@@ -324,9 +338,7 @@ body {
         opacity: 0}
 }
 @keyframes p2-hp-points-down {
-    0% {transform:translateY(0%);
-
-        opacity: 0}
+    8% {transform:translateY(0%)}
     25% {opacity: 1;}
     75% {opacity: 1;}
     100% {transform:translateY(-350%);
@@ -335,8 +347,7 @@ body {
 }
 
 @keyframes p2-hp-points-up {
-    0% {transform:translateY(0%);
-        opacity: 0}
+    8% {transform:translateY(0%);}
     25% {opacity: 1;}
     75% {opacity: 1;}
     100%{transform:translateY(-350%);
@@ -349,26 +360,24 @@ body {
 }
 
 @keyframes p1-crit-struck {
-    0% {animation-duration: 5s;
-        content: url('../gifs/Bloodspurt.gif');
+    3% {content: url('../gifs/Bloodspurt.gif');
         opacity: 1;}
     100% {content: url('../gifs/Bloodspurt.gif')}
 }
 
 @keyframes p2-struck {
-    0% {animation-duration: 5s;}
-    100% {content: url('../gifs/Wizard-struck.gif');}
+    3% {content: url('../gifs/Wizard-struck-left.gif')}
+    100% {content: url('../gifs/Wizard-struck-left.gif')}
 }
 
 @keyframes p2-crit-struck {
-    0% {animation-duration: 5s;
-        content: url('../gifs/Bloodspurt.gif');
+    3% {content: url('../gifs/Bloodspurt.gif');
         opacity: 1;}
     100% {content: url('../gifs/Bloodspurt.gif')}
 }
 
 @keyframes p1-spell-struck {
-    0% {content: url('../gifs/Implode.gif');
+    3% {content: url('../gifs/Implode.gif');
         opacity: 0}
         25% {opacity: 0.7;}
         75% {opacity: 0.7;}
@@ -377,7 +386,7 @@ body {
 }            
 
 @keyframes p2-spell-struck {
-    0% {content: url('../gifs/Explosion.gif');
+    3% {content: url('../gifs/Explosion.gif');
         opacity: 0}
         25% {opacity: 0.7;}
         75% {opacity: 0.7;}
