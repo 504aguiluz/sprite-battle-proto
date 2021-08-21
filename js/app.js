@@ -1,7 +1,8 @@
 console.log('SPRITE BATTLE')
 // mp3s
 // https://www.w3schools.com/jsref/prop_audio_volume.asp
-const hipHop4 = document.getElementById('hip-hop7')
+const hipHop7 = document.getElementById('hip-hop7')
+const hipHop2 = document.getElementById('hip-hop2')
 const deathSFX = document.getElementById('death-sfx')
 const swordHitSFX = document.getElementById('sword-hit-sfx')
 const swordCritSFX = document.getElementById('sword-crit-sfx')
@@ -173,7 +174,7 @@ class Sprite {
             }
         }
         this.struckAnimation(player, status)
-        // hipHop4.play()
+        // hipHop7.play()
     }
     
     spellAnimation (player, status) {
@@ -225,7 +226,7 @@ class Sprite {
             this.sprite2Effect.style.animation = "p2-heal-effect 2s ease-in"
             this.sprite2Points.style.animation = "p2-hp-points-up 2s"
             }
-            // hipHop4.play()
+            // hipHop7.play()
     }
     
     struckAnimation (player, status) {
@@ -284,7 +285,7 @@ class Sprite {
     checkDeath(){
         if(player1.currentHp <= 0) {
             announceBar.style.opacity = '0.9'
-            hipHop4.pause()
+            hipHop7.pause()
             deathSFX.play()
             this.sprite1.style.animation = "p1-death 500ms"
             this.announceSomething(`${player1.name} the ${player1.type} has been defeated!`, '10s')
@@ -292,7 +293,8 @@ class Sprite {
             this.fightAgain()
         } if (player2.currentHp <= 0) {
             announceBar.style.opacity = '0.9'
-            hipHop4.pause()
+            hipHop7.pause()
+            hipHop2.pause()
             deathSFX.play()
             this.sprite2.style.animation = "p2-death 2s"
             this.sprite2.src = "../gifs/Wizard-dead.gif"
@@ -319,12 +321,13 @@ class Sprite {
         this.refreshCharacters() // not working
         announceBar.style.opacity = 0
         playButton.style.opacity = 0
-        hipHop4.play()
         changeVisibility(hideToggle, 'visible')
         this.toggleBattleMenus()
         if (turn == 'p1'){
+            hipHop7.play()
             bkgImg.src = '../img/snow-field.jpeg'
         } else if (turn == 'p2'){
+            hipHop2.play()
             bkgImg.src = '../img/buddhist-volcano.png'
         }
     }
@@ -334,10 +337,10 @@ class Sprite {
         playButton.style.opacity = 0.9
     }
     refreshCharacters(){
-        player1.currentHp = player1.maxHp
-        player2.currentHp = player2.maxHp
-        player1.currentMp = player1.maxMp
-        player2.currentMp = player2.maxMp
+        player1.currentHp += player1.maxHp
+        player2.currentHp += player2.maxHp
+        player1.currentMp += player1.maxMp
+        player2.currentMp += player2.maxMp
     }
 }
 
