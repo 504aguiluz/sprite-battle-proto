@@ -331,11 +331,11 @@ class Sprite {
         if (turn == 'p1'){
             hipHop7.play()
             bkgImg.src = '../img/snow-field.jpeg'
-            this.announceSomething(`${player1.name}'s level`)
+            // this.announceSomething(`${player1.name}'s level`) // announces level
         } else if (turn == 'p2'){
             hipHop2.play()
             bkgImg.src = '../img/buddhist-volcano.png'
-            this.announceSomething(`${player2.name}'s level`)
+            // this.announceSomething(`${player2.name}'s level`) // announces level
         }
     }
     // sets restart prompt======================================================
