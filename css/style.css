@@ -1,9 +1,4 @@
 
-    /* 1119 × 747*/
-    
-html {
-    /* margin: auto; */
-}
 
 body {
     contain: layout;
@@ -18,11 +13,6 @@ body {
     -o-background-size: cover;
     background-size: cover;
     opacity: 1;
-}
-
-.hide {
-    /* opacity: 0; */
-    /* visibility: 'hidden'; */
 }
 
 #gameboard {
@@ -216,7 +206,7 @@ body {
     text-align: center;
 }
 
-#play-button {
+.play-buttons {
     position: fixed;
     width: 125px;
     font-family: 'Gowun Batang', serif;
@@ -225,6 +215,13 @@ body {
     padding: 5px;
     margin: 250px 0px 0px 500px;
     font-size: 20px;
+}
+#fight-now-button {
+    opacity: 0;
+}
+
+#fight-again-button {
+    top: 75px;
     opacity: 0;
 }
 
@@ -403,10 +400,6 @@ body {
     0% {content: url('../gifs/Wizard-death.gif');}
     100% {content: url('../gifs/Wizard-dead.gif');}
 }
-
-
-
-/* look up display:none or visibility options */
 
 /* fonts */
 /* font-family: 'Gowun Batang', serif;

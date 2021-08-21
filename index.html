@@ -28,6 +28,12 @@
     <audio id="heal2-sfx" class="sfx">
         <source src="sfx/Heal-2.mp3">
     </audio>
+    <audio id="hip-hop7">
+        <source src="music/MFA 7.mp3">
+    </audio>
+    <audio id="hip-hop2">
+        <source src="music/MFA BEAT 2.mp3">
+    </audio>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,66 +44,62 @@
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&family=Josefin+Sans&family=Julius+Sans+One&family=Tourney:wght@100&family=VT323&family=Yomogi&display=swap');
             </style>
-</head>
-<div id="announce-bar" class="player-containers announce"><div>THIS IS</div> S P R I T E   C L U B ! ! !
-</div>
-<button id="play-button" class="player-containers announce">FIGHT NOW!</button>
-<body >
-    <img id="bkg-img" src="img/japanese-temple.png">
-    <img class="p1-sprite hide" id="p1-sprite" src="gifs/Martial-Hero-idle.gif" alt="p1-sprite">
-        <img class="p1-sprite" id="p1-effect" src="gifs/ManaFlare.gif" alt="p1-effect">
-        <p class="p1-sprite" id="p1-sprite-points"></p>
-        <img class="p2-sprite hide" id= "p2-sprite" src="../gifs/Wizard-idle-left.gif" alt="p2-sprite">
-        <img class="p2-sprite" id="p2-effect" src="gifs/Explosion.gif" alt="p2-effect">
-        <p class="p2-sprite" id="p2-sprite-points"></p>
-        <footer class="footer">
-            <div id="p1-container" class="player-containers hide">
-                <div id="p1-battle-menu" class="battle-menu hide">
-                    <!-- <h1 class="labels">p1-container</h1> -->
-                    <button id="p1-fight-button" class="battle-buttons">Fight</button>
-                    <button id="p1-spell-button" class="battle-buttons">Spell</button>
-                    <button id="p1-heal-button" class="battle-buttons">Heal</button>
-                </div>
-                <div id="p1-stats" class="battle-menu hide">
-                    <div id="p1-stats-text">
-                        <h3 class="p1-name">Player 1:</h3>
-                        <h3>HP</h3>
-                        <h3>MP</h3>
-                    </div>
-                    <div id="p1-stats-nums">
-                        <h3></h3>
-                        <h3 id="p1-HP">60/  60</h3>
-                        <h3 id="p1-MP">30/  30</h3>
-                    </div>
-                </div>
-            </div>
-            <div id="p2-container" class="player-containers hide">
-                <div id="p2-battle-menu" class="battle-menu hide">
-                    <!-- <h1>p2-container</h1> -->
-                    <button id="p2-fight-button" class="battle-buttons">Fight</button>
-                    <button id="p2-spell-button" class="battle-buttons">Spell</button>
-                    <button id="p2-heal-button" class="battle-buttons">Heal</button>
-                </div>
-                <div id="p2-stats" class="battle-menu hide">
-                    <div id="p2-stats-text">
-                        <h3 class="p2-name">Player 2:</h3>
-                        <h3>HP</h3>
-                        <h3>MP</h3>
-                    </div>
-                    <div id="p2-stats-nums">
-                        <h3></h3>
-                        <h3 id="p2-HP">60/  60</h3>
-                        <h3 id="p2-MP">30/  30</h3>
-                    </div>
-                </div>
-            </div>
-        </footer>
-</body>
-    <audio id="hip-hop7">
-        <source src="music/MFA 7.mp3">
-    </audio>
-    <audio id="hip-hop2">
-        <source src="music/MFA BEAT 2.mp3">
-    </audio>
+    </head>
+
+    <div id="announce-bar" class="player-containers announce"><div>THIS IS</div> S P R I T E   C L U B ! ! !
+    </div>
+    <button id="fight-now-button" class="player-containers play-buttons announce">FIGHT NOW!</button>
+    <button id="fight-again-button" class="player-containers play-buttons announce">FIGHT AGAIN?</button>
     
-    </html>
+    <body >
+        <img id="bkg-img" src="img/japanese-temple.png">
+        <img class="p1-sprite hide" id="p1-sprite" src="gifs/Martial-Hero-idle.gif" alt="p1-sprite">
+            <img class="p1-sprite" id="p1-effect" src="gifs/ManaFlare.gif" alt="p1-effect">
+            <p class="p1-sprite" id="p1-sprite-points"></p>
+            <img class="p2-sprite hide" id= "p2-sprite" src="../gifs/Wizard-idle-left.gif" alt="p2-sprite">
+            <img class="p2-sprite" id="p2-effect" src="gifs/Explosion.gif" alt="p2-effect">
+            <p class="p2-sprite" id="p2-sprite-points"></p>
+            <footer class="footer">
+                <div id="p1-container" class="player-containers hide">
+                    <div id="p1-battle-menu" class="battle-menu hide">
+                        <!-- <h1 class="labels">p1-container</h1> -->
+                        <button id="p1-fight-button" class="battle-buttons">Fight</button>
+                        <button id="p1-spell-button" class="battle-buttons">Spell</button>
+                        <button id="p1-heal-button" class="battle-buttons">Heal</button>
+                    </div>
+                    <div id="p1-stats" class="battle-menu hide">
+                        <div id="p1-stats-text">
+                            <h3 class="p1-name">Musashi:</h3>
+                            <h3>HP</h3>
+                            <h3>MP</h3>
+                        </div>
+                        <div id="p1-stats-nums">
+                            <h3></h3>
+                            <h3 id="p1-HP">60/  60</h3>
+                            <h3 id="p1-MP">30/  30</h3>
+                        </div>
+                    </div>
+                </div>
+                <div id="p2-container" class="player-containers hide">
+                    <div id="p2-battle-menu" class="battle-menu hide">
+                        <!-- <h1>p2-container</h1> -->
+                        <button id="p2-fight-button" class="battle-buttons">Fight</button>
+                        <button id="p2-spell-button" class="battle-buttons">Spell</button>
+                        <button id="p2-heal-button" class="battle-buttons">Heal</button>
+                    </div>
+                    <div id="p2-stats" class="battle-menu hide">
+                        <div id="p2-stats-text">
+                            <h3 class="p2-name">Gilfoyle:</h3>
+                            <h3>HP</h3>
+                            <h3>MP</h3>
+                        </div>
+                        <div id="p2-stats-nums">
+                            <h3></h3>
+                            <h3 id="p2-HP">60/  60</h3>
+                            <h3 id="p2-MP">30/  30</h3>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+    </body>
+</html>

@@ -17,9 +17,10 @@ const heal2SFX = document.getElementById('heal2-sfx')
 const announceBar = document.getElementById('announce-bar')
 const bkgImg = document.getElementById('bkg-img')
 const hideToggle = document.getElementsByClassName('hide')
-const playButton = document.getElementById('play-button')
+const fightNowBtn = document.getElementById('fight-now-button')
+const fightAgainBtn = document.getElementById('fight-again-button')
 
-
+// randomization
 const playerArr = ['p1', 'p2']
 const randomPlayer = (value)=>{
     let item = value[Math.floor(Math.random()*value.length)]
@@ -29,7 +30,7 @@ let turn = randomPlayer(playerArr)
 console.log(turn)
 
 
-
+// sprite class======================================================
 class Sprite {
     constructor (name, type) {
         this.name = name
@@ -62,16 +63,20 @@ class Sprite {
         this.p2BattleMenu = document.getElementById('p2-battle-menu')
         this.weapon = ['sword', 'axe', 'staff'] //to add: modifies fightDmg and spellDmg
     }
+
+    // d20 roll======================================================
     rollD20(num = 1, rollType = ''){
         this.d20 = Math.ceil(Math.random()*20) * num
         console.log(`(${num})d20 ${rollType}: ${this.d20}`) 
     }
 
+    //d8 roll ======================================================
     rollD8(num = 1, rollType = ''){
         this.d8 = Math.ceil(Math.random()*8) * num
         console.log(`(${num})d8 ${rollType}: ${this.d8}`)
     }
 
+    // updates stats in window======================================================
     updateStats(){
         this.minMaxStats()
         this.p1HP.innerHTML = `${player1.currentHp}/ ${player1.maxHp}`
@@ -81,6 +86,7 @@ class Sprite {
         this.checkDeath()
     }
 
+    // battle options======================================================
     fight(player, opponent, status = 'hit'){
         // this.toggleBattleMenus()
         player.rollD20(1, 'attack roll')
@@ -137,6 +143,7 @@ class Sprite {
         this.updateStats()
     }
 
+    // animation methods======================================================
     fightAnimation(player, status){
         if (turn === 'p1') {
             if (status == 'hit'){
@@ -174,7 +181,6 @@ class Sprite {
             }
         }
         this.struckAnimation(player, status)
-        // hipHop7.play()
     }
     
     spellAnimation (player, status) {
@@ -226,7 +232,6 @@ class Sprite {
             this.sprite2Effect.style.animation = "p2-heal-effect 2s ease-in"
             this.sprite2Points.style.animation = "p2-hp-points-up 2s"
             }
-            // hipHop7.play()
     }
     
     struckAnimation (player, status) {
@@ -239,10 +244,7 @@ class Sprite {
          }
     }
 
-// //https://css-tricks.com/restart-css-animation/
-//     resetAnimation(animationClass){ //how to reset all animations by class?
-// }
-
+    // toggles visibility and utilization of player battle menus===================
     toggleBattleMenus (){
         if (turn == 'p1'){
             this.p1BattleMenu.disabled = false
@@ -261,8 +263,8 @@ class Sprite {
             this.p1BattleMenu.style.visibility = 'hidden'
             this.p2BattleMenu.style.visibility = 'hidden'
         }
-        // this.switchTurn()
     }
+    // sets boundaries of HP and MP - I need to dry this==========================
     minMaxStats(){ //DRY THIS CODE!!! 
         if (player1.currentHp <= 0){
             player1.currentHp = 0
@@ -282,6 +284,7 @@ class Sprite {
             player2.currentMp = player2.maxMp
         }
     }
+    // checks if anyone has died each round; if so, prompts restart===============
     checkDeath(){
         if(player1.currentHp <= 0) {
             announceBar.style.opacity = '0.9'
@@ -290,7 +293,7 @@ class Sprite {
             this.sprite1.style.animation = "p1-death 500ms"
             this.announceSomething(`${player1.name} the ${player1.type} has been defeated!`, '10s')
             this.sprite1.src = "../gifs/Martial-Hero-dead.gif"
-            this.fightAgain()
+            this.fightAgainPrompt()
         } if (player2.currentHp <= 0) {
             announceBar.style.opacity = '0.9'
             hipHop7.pause()
@@ -299,15 +302,17 @@ class Sprite {
             this.sprite2.style.animation = "p2-death 2s"
             this.sprite2.src = "../gifs/Wizard-dead.gif"
             this.announceSomething(`${player2.name} the ${player2.type} has been defeated!`, '10s')
-            this.fightAgain()
+            this.fightAgainPrompt()
         } else {
             this.switchTurn()
         }
     }
+    // used to announce something in the announce bar===========================
     announceSomething (text, duration = '3s'){
         announceBar.innerHTML = text
         announceBar.style.animation = `announce ${duration}`
     }
+    // switches turns
     switchTurn(){ 
         if (turn === 'p1'){
             turn = 'p2'
@@ -317,41 +322,37 @@ class Sprite {
         console.log(`${turn}'s turn`)
         this.toggleBattleMenus()
     }
+    // start battle button======================================================
     fightNow(){
-        this.refreshCharacters() // not working
         announceBar.style.opacity = 0
-        playButton.style.opacity = 0
+        fightNowBtn.style.opacity = 0
         changeVisibility(hideToggle, 'visible')
         this.toggleBattleMenus()
         if (turn == 'p1'){
             hipHop7.play()
             bkgImg.src = '../img/snow-field.jpeg'
+            this.announceSomething(`${player1.name}'s level`)
         } else if (turn == 'p2'){
             hipHop2.play()
             bkgImg.src = '../img/buddhist-volcano.png'
+            this.announceSomething(`${player2.name}'s level`)
         }
     }
-    fightAgain(){
-        playButton.disabled = false
-        playButton.innerHTML = 'FIGHT AGAIN?'
-        playButton.style.opacity = 0.9
-    }
-    refreshCharacters(){
-        player1.currentHp += player1.maxHp
-        player2.currentHp += player2.maxHp
-        player1.currentMp += player1.maxMp
-        player2.currentMp += player2.maxMp
+    // sets restart prompt======================================================
+    fightAgainPrompt(){
+        fightAgainBtn.disabled = false
+        fightAgainBtn.style.opacity = 0.9
     }
 }
 
-//instantiate players
+//instantiate players======================================================
 const player1 = new Sprite ('Musashi', 'warrior')
-const player2 = new Sprite ('Merlin', 'cleric')
+const player2 = new Sprite ('Gilfoyle', 'cleric')
 
-//global functions
+//global functions==========================================================
 function introScreen(){
     announceBar.style.opacity = 0.9
-    playButton.style.opacity = 0.9
+    fightNowBtn.style.opacity = 0.9
     changeVisibility(hideToggle, 'hidden')
 }
 
@@ -362,12 +363,9 @@ function changeOpacity(element, opacity){
     [].forEach.call(element, function (el) {el.style.opacity = opacity});
 }
 
-// startBattle()
-
-
-// event handlers
+// event handlers===========================================================
 window.addEventListener('load', ()=>{
-    console.log('page has loaded check')
+    console.log('page has loaded')
     introScreen()
 })
 document.getElementById('p1-fight-button').addEventListener('click', ()=>{player1.fight(player1, player2)})
@@ -376,25 +374,13 @@ document.getElementById('p1-heal-button').addEventListener('click', ()=>{player1
 document.getElementById('p2-fight-button').addEventListener('click', ()=>{player2.fight(player2, player1)})
 document.getElementById('p2-spell-button').addEventListener('click', ()=>{player2.spell(player2, player1)})
 document.getElementById('p2-heal-button').addEventListener('click', ()=>{player2.heal(player2)})
-document.getElementById('play-button').addEventListener('click', ()=>{player1.fightNow()}, ()=>{console.log('play game')})
+document.getElementById('fight-now-button').addEventListener('click', ()=>{player1.fightNow()}, ()=>{console.log('play game')})
+document.getElementById('fight-again-button').addEventListener('click', ()=>{location.reload()})
 
-// notes
+// notes=====================================================================
+// how to toggle bkg imgs
 // https://stackoverflow.com/questions/31565045/toggle-background-image-html
 
-// js toggle class
-// document.body.classList.toggle('BgClass') 
+//how to reset all animations by class
+// //https://css-tricks.com/restart-css-animation/
 
-// css background
-// body {
-//     background-size: cover; 
-//     background-repeat: no-repeat;  
-//     background-attachment: fixed 
-//   }
-// .BgClass {
-//     background-image: url('http://freedomwallpaper.com/wallpaper2/funky-wallpaper-hd.jpg');
-// }
-
-// // This will disable all the children of the div
-// var nodes = document.getElementById("dcalc").getElementsByTagName('*');
-// for(var i = 0; i < nodes.length; i++){
-//      nodes[i].disabled = true
