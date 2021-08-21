@@ -292,7 +292,7 @@ class Sprite {
             deathSFX.play()
             this.sprite1.style.animation = "p1-death 500ms"
             this.announceSomething(`${player1.name} the ${player1.type} has been defeated!`, '10s')
-            this.sprite1.src = "../gifs/Martial-Hero-dead.gif"
+            this.sprite1.src = "./gifs/Martial-Hero-dead.gif"
             this.fightAgainPrompt()
         } if (player2.currentHp <= 0) {
             announceBar.style.opacity = '0.9'
@@ -300,7 +300,7 @@ class Sprite {
             hipHop2.pause()
             deathSFX.play()
             this.sprite2.style.animation = "p2-death 2s"
-            this.sprite2.src = "../gifs/Wizard-dead.gif"
+            this.sprite2.src = "./gifs/Wizard-dead.gif"
             this.announceSomething(`${player2.name} the ${player2.type} has been defeated!`, '10s')
             this.fightAgainPrompt()
         } else {
@@ -330,11 +330,11 @@ class Sprite {
         this.toggleBattleMenus()
         if (turn == 'p1'){
             hipHop7.play()
-            bkgImg.src = '../img/snow-field.jpeg'
+            bkgImg.src = './img/snow-field.jpeg'
             // this.announceSomething(`${player1.name}'s level`) // announces level
         } else if (turn == 'p2'){
             hipHop2.play()
-            bkgImg.src = '../img/buddhist-volcano.png'
+            bkgImg.src = './img/buddhist-volcano.png'
             // this.announceSomething(`${player2.name}'s level`) // announces level
         }
     }
