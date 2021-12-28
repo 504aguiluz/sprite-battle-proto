@@ -31,15 +31,11 @@ console.log(turn)
 
 // set default volume
 let defVolume = document.querySelectorAll('audio')
+let muteToggle = document.getElementById('mute')
 
 for(let i = 0; i < defVolume.length; i++){
     defVolume[i].volume = 0.1
-}
-
-// toggle mute
-let muteToggle = document.getElementById('mute')
-console.log(muteToggle.control.checked)
-for(let i = 0; i < defVolume.length; i++){
+    // toggle mute
     muteToggle.control.checked ? defVolume[i].muted = true : defVolume[i].muted = false
 }
 

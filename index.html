@@ -56,11 +56,11 @@
     <body >
         <img id="bkg-img" src="img/japanese-temple.png">
         <div class=" vol-cont">
-            <label id="mute" class="switch">
-                <input type="checkbox" checked>
-                <span class="slider"></span>
+            <input id="mute-button" type="checkbox" checked>
+            <label id="mute" class="mute-label" for="mute-button">
+            <span class="span"></span>
             </label>
-            <input id="vol-control" type="range" min="0" max="1" step=".005" value=".2"></input>
+            <input id="vol-control" class="slider" type="range" min="0" max="1" step=".005" value=".2"></input>
         </div>
         <img class="p1-sprite hide" id="p1-sprite" src="gifs/Martial-Hero-idle.gif" alt="p1-sprite">
             <img class="p1-sprite" id="p1-effect" src="gifs/ManaFlare.gif" alt="p1-effect">
