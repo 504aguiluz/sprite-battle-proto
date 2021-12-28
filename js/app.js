@@ -39,6 +39,16 @@ for(let i = 0; i < defVolume.length; i++){
     muteToggle.control.checked ? defVolume[i].muted = true : defVolume[i].muted = false
 }
 
+toggleMute = () => {
+    for(let i = 0; i < defVolume.length; i++){
+        if(muteToggle.control.checked){
+            defVolume[i].muted = true
+        } else {
+            defVolume[i].muted = false
+        }
+    }
+}
+
 // volume control
 let slider = document.querySelector('#vol-control')
 
@@ -49,7 +59,6 @@ slider.onchange = (e) => {
     for (let i = 0; i < audio.length; i++) {
         audio[i].volume = slider.value
     }
-
 }
 
 // sprite class======================================================
@@ -398,13 +407,7 @@ document.getElementById('p2-spell-button').addEventListener('click', ()=>{player
 document.getElementById('p2-heal-button').addEventListener('click', ()=>{player2.heal(player2)})
 document.getElementById('fight-now-button').addEventListener('click', ()=>{player1.fightNow()}, ()=>{console.log('play game')})
 document.getElementById('fight-again-button').addEventListener('click', ()=>{location.reload()})
-document.getElementById('mute').addEventListener('click', ()=>{for(let i = 0; i < defVolume.length; i++){
-        if(muteToggle.control.checked){
-            defVolume[i].muted = true
-        } else {
-            defVolume[i].muted = false
-        }
-    }
+document.getElementById('mute').addEventListener('click', ()=>{toggleMute()
 })
 
 // notes=====================================================================

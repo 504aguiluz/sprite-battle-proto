@@ -31,41 +31,51 @@ input[type=checkbox] {
     display:none;
 }
 
-input[type=checkbox]:checked + label {
+input[type=checkbox] + label {
     background:url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/969699/mute.svg") no-repeat;
     padding: 20px;
     background-size: 70%;
 }
 
-input[type=checkbox] + label {
+input[type=checkbox]:checked + label {
     background:url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/969699/unmute.svg") no-repeat;
-    padding: 20px;
     background-size: 50%;
 }
 
 #mute:hover {
     opacity: .5;
+    cursor: pointer; 
 }
 
 .slider {
     margin-top: 10px;
     -webkit-appearance: none;
     appearance: none;
-    background: #76b95b;
+    background: #c2c2c2;
     outline: none;
     opacity: 0.7;
-    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    -webkit-transition: .2s; 
     transition: opacity .2s;
     box-shadow: 0 0 5px #000000,
-    0 0 5px #f403c0,
-    0 0 10px #f403c0,
-    0 0 40px #f403c0;
+    0 0 5px #1703f4,
+    0 0 10px #1703f4,
+    0 0 40px #1703f4;
+    margin-top: 10px;
     border-radius: 10px;
 }
 
 .slider:hover {
     opacity: 1;
 }
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #1703f4;
+    cursor: pointer; 
+  }
 
 #bkg-img {
     opacity: 0.6;
