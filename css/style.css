@@ -1,16 +1,16 @@
+html {
+    /* background-color:rgb(255, 255, 255); */
+}
+
 body {
     contain: layout;
+    margin: auto;
     width: 1119px;
-    height: 747px;
-    justify-items: center;
-    background-position: center;
-    background-repeat: no-repeat;
-    /* background-image: url('../img/snow-field.jpeg'); */
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    height: 600px;
     opacity: 1;
+    margin-top: 3%;
+    border: 3px solid black;
+    border-radius: 15px;
 }
 
 #gameboard {
@@ -19,6 +19,12 @@ body {
     height: 200px;
     width: 200px;
     border-radius: 50%;
+}
+
+.vol-cont {
+    position: fixed;
+    /* border: 3px solid aqua; */
+    margin-left: 42%;
 }
 
 #bkg-img {
@@ -31,18 +37,13 @@ body {
     background-size: cover;
 }
 
-#vol-control {
-    position: fixed;
-    border: 3px solid red;
-}
-
 /* sprites */
 #p1-sprite {
     /* display: flex; */
     background-color: transparent;
     position: fixed;
     width: 400px;
-    top: 272px;
+    top: 123px;
     left: 200px;
 }
 
@@ -51,14 +52,14 @@ body {
     background-color: transparent;
     width: 230px;
     position: fixed;
-    top: 207px;
+    top: 62px;
     right: 200px;
 }
 
 #p1-effect {
     display: flex;
     position: fixed;
-    top: 370px;
+    top: 225px;
     left: 200px;
     width: 150px;
     opacity: 0;
@@ -66,7 +67,7 @@ body {
 
 #p2-effect {
     position: fixed;
-    top: 350px;
+    top: 205px;
     right: 230px;
     width: 150px;
     opacity: 0;
@@ -77,7 +78,7 @@ body {
     display: flex;
     position: fixed;
     left: 255px;
-    top: 400px;
+    top: 255px;
     width: 150px;
     opacity: 0;
     font-size: 30px;;
@@ -90,7 +91,7 @@ body {
     display: flex;
     position: fixed;
     right: 180px; 
-    top: 400px;
+    top: 255px;
     width: 150px;
     opacity: 0;
     font-size: 30px;;
@@ -145,12 +146,12 @@ body {
 
 #p1-container {
     flex-direction: row-reverse;
+
 }
 
 #p2-container {
     display: flex;
     flex-direction: row;
-    padding-right: 10px;
 }
 
 .battle-menu {
