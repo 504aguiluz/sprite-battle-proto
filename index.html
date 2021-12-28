@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
     <!-- mp3s -->
-    <audio id="death-sfx" class="sfx">
+    <audio id="death-sfx" class="sfx audio">
         <source src="sfx/Samurai-Death.mp3">
         </audio>
-    <audio id="sword-hit-sfx" class="sfx">
+    <audio id="sword-hit-sfx" class="sfx audio">
         <source src="sfx/Sword-hit.mp3">
     </audio>
-    <audio id="sword-crit-sfx" class="sfx">
+    <audio id="sword-crit-sfx" class="sfx audio">
         <source src="sfx/Sword-crit.mp3">
     </audio>
-    <audio id="sword-miss-sfx" class="sfx">
+    <audio id="sword-miss-sfx" class="sfx audio">
         <source src="sfx/Sword-miss.mp3">
     </audio>
-    <audio id="sword-drama-sfx" class="sfx">
+    <audio id="sword-drama-sfx" class="sfx audio">
         <source src="sfx/Sword-dramatic.mp3">
     </audio>
-    <audio id="explosion-sfx" class="sfx">
+    <audio id="explosion-sfx" class="sfx audio">
         <source src="sfx/Explosion.mp3">
     </audio>
-    <audio id="frostbite-sfx" class="sfx">
+    <audio id="frostbite-sfx" class="sfx audio">
         <source src="sfx/Frostbite.mp3">
     </audio>
-    <audio id="heal1-sfx" class="sfx">
+    <audio id="heal1-sfx" class="sfx audio">
         <source src="sfx/Heal-1.mp3">
     </audio>
-    <audio id="heal2-sfx" class="sfx">
+    <audio id="heal2-sfx" class="sfx audio">
         <source src="sfx/Heal-2.mp3">
     </audio>
-    <audio id="hip-hop7">
+    <audio id="hip-hop7" class="music audio">
         <source src="music/MFA 7.mp3">
     </audio>
-    <audio id="hip-hop2">
+    <audio id="hip-hop2" class="music audio">
         <source src="music/MFA BEAT 2.mp3">
     </audio>
     <head>
@@ -46,13 +46,16 @@
             </style>
     </head>
 
-    <div id="announce-bar" class="player-containers announce"><div>THIS IS</div> S P R I T E   C L U B ! ! !
+    <div id="announce-bar" class="player-containers announce">
+        <div>THIS IS</div> 
+        S P R I T E   C L U B ! ! !
     </div>
     <button id="fight-now-button" class="player-containers play-buttons announce">FIGHT NOW!</button>
     <button id="fight-again-button" class="player-containers play-buttons announce">FIGHT AGAIN?</button>
     
     <body >
         <img id="bkg-img" src="img/japanese-temple.png">
+        <input id="vol-control" type="range" min="0" max=".5" step=".005" value=".2"></input>
         <img class="p1-sprite hide" id="p1-sprite" src="gifs/Martial-Hero-idle.gif" alt="p1-sprite">
             <img class="p1-sprite" id="p1-effect" src="gifs/ManaFlare.gif" alt="p1-effect">
             <p class="p1-sprite" id="p1-sprite-points"></p>

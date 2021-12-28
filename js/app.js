@@ -1,6 +1,5 @@
 console.log('SPRITE BATTLE')
 // mp3s
-// https://www.w3schools.com/jsref/prop_audio_volume.asp
 const hipHop7 = document.getElementById('hip-hop7')
 const hipHop2 = document.getElementById('hip-hop2')
 const deathSFX = document.getElementById('death-sfx')
@@ -29,6 +28,26 @@ const randomPlayer = (value)=>{
 let turn = randomPlayer(playerArr)
 console.log(turn)
 
+// volume control
+let slider = document.querySelector('#vol-control')
+
+console.log(slider)
+
+let defVolume = document.querySelectorAll('audio')
+
+for(let i = 0; i < defVolume.length; i++){
+    defVolume[i].volume = 0.2
+}
+
+slider.onchange = (e) => {
+    let audio = document.querySelectorAll('audio')
+    console.log(audio)
+    console.log('slider value: ' + slider.value)
+    for (let i = 0; i < audio.length; i++) {
+        audio[i].volume = slider.value
+    }
+
+}
 
 // sprite class======================================================
 class Sprite {
