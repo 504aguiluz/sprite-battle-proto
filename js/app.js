@@ -28,16 +28,23 @@ const randomPlayer = (value)=>{
 let turn = randomPlayer(playerArr)
 console.log(turn)
 
-// volume control
-let slider = document.querySelector('#vol-control')
 
-console.log(slider)
-
+// set default volume
 let defVolume = document.querySelectorAll('audio')
 
 for(let i = 0; i < defVolume.length; i++){
-    defVolume[i].volume = 0.2
+    defVolume[i].volume = 0.1
 }
+
+// toggle mute
+let muteToggle = document.getElementById('mute')
+console.log(muteToggle.control.checked)
+for(let i = 0; i < defVolume.length; i++){
+    muteToggle.control.checked ? defVolume[i].muted = true : defVolume[i].muted = false
+}
+
+// volume control
+let slider = document.querySelector('#vol-control')
 
 slider.onchange = (e) => {
     let audio = document.querySelectorAll('audio')
@@ -395,6 +402,14 @@ document.getElementById('p2-spell-button').addEventListener('click', ()=>{player
 document.getElementById('p2-heal-button').addEventListener('click', ()=>{player2.heal(player2)})
 document.getElementById('fight-now-button').addEventListener('click', ()=>{player1.fightNow()}, ()=>{console.log('play game')})
 document.getElementById('fight-again-button').addEventListener('click', ()=>{location.reload()})
+document.getElementById('mute').addEventListener('click', ()=>{for(let i = 0; i < defVolume.length; i++){
+        if(muteToggle.control.checked){
+            defVolume[i].muted = true
+        } else {
+            defVolume[i].muted = false
+        }
+    }
+})
 
 // notes=====================================================================
 // how to toggle bkg imgs
