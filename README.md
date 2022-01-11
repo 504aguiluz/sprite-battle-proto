@@ -70,3 +70,9 @@ Here's a link to [Sprite Club](https://504aguiluz.github.io/sprite-battle-proto/
 - to integrate this app with actual DnD-style classes that utilize real mechanics to level up players and allow new spells, abilities, armor, weapons, etc.
 - to create a character building page so that players can design their own characters
 - to create an auto-battle feature that would allow you to set parameters for battles ahead of time and watch them play out automatically when the battle begins
+
+# KNOWN BUGS
+
+- characters briefly appear before title screen
+- mute button must be cycled before unmuting
+- animations/sfx execute inconsistently
