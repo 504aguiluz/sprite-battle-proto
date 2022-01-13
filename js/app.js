@@ -31,17 +31,17 @@ console.log(turn)
 
 // set default volume
 let defVolume = document.querySelectorAll('audio')
-let muteToggle = document.getElementById('mute')
+let muteToggle = document.getElementById('mute-button')
 
 for(let i = 0; i < defVolume.length; i++){
+    // initialize default volume and mute all audio
     defVolume[i].volume = 0.1
-    // toggle mute
-    muteToggle.control.checked ? defVolume[i].muted = true : defVolume[i].muted = false
+    defVolume[i].muted = true
 }
 
 toggleMute = () => {
     for(let i = 0; i < defVolume.length; i++){
-        if(muteToggle.control.checked){
+        if(muteToggle.checked){
             defVolume[i].muted = true
         } else {
             defVolume[i].muted = false
@@ -200,15 +200,10 @@ class Sprite {
         if (turn === 'p1') {
             if (status == 'hit'){
                 swordHitSFX.play()
-                // player.sprite2Points.style.animation = "p2-hp-points-down 2s"
-                // player.sprite1.style.animation = "p1-attack 2s"
                 this.setAnimation(player.sprite2Points, 'p2-hp-points-down', 2000)
                 this.setAnimation(player.sprite1, 'p1-attack', 2000)
             } else if (status == 'crit'){
                 swordCritSFX.play()
-                // player.sprite2Points.style.animation = "p2-hp-points-down 2s"
-                // player.sprite1.style.animation = "p1-attack 2s"
-                // player.sprite2Effect.style.animation = "p2-crit-struck 1s"
                 this.setAnimation(player.sprite2Points, 'p2-hp-points-down', 2000)
                 this.setAnimation(player.sprite1, 'p1-attack', 2000)
                 this.setAnimation(player.sprite2Effect, 'p2-crit-struck', 1000)
@@ -216,27 +211,25 @@ class Sprite {
                 swordMissSFX.play()
                 player.sprite1Points.innerHTML = 'missed'
                 player.sprite2Points.innerHTML = 'missed'
-                // player.sprite2Points.style.animation = "p2-hp-points-down 2s"
-                // player.sprite1.style.animation = "p1-attack 2s"
                 this.setAnimation(player.sprite2Points, 'p2-hp-points-down', 2000)
                 this.setAnimation(player.sprite1, 'p1-attack', 2000)
             }
         } else if (turn === 'p2') {
             if (status == 'hit'){
                 swordDramaSFX.play()
-                player.sprite1Points.style.animation = "p1-hp-points-down 2s"
-                player.sprite2.style.animation = "p2-attack 2s"
+                this.setAnimation(player.sprite1Points, 'p1-hp-points-down', 2000)
+                this.setAnimation(player.sprite2, 'p2-attack', 2000)
             } else if (status == 'crit'){
                 swordDramaSFX.play()
-                player.sprite1Points.style.animation = "p1-hp-points-down 2s"
-                player.sprite2.style.animation = "p2-attack 2s"
-                this.sprite1Effect.style.animation = "p1-crit-struck 1s"
+                this.setAnimation(player.sprite1Points, 'p1-hp-points-down', 2000)
+                this.setAnimation(player.sprite2, 'p2-attack', 2000)
+                this.setAnimation(player.sprite1Effect, 'p1-crit-struck', 1000)
             } else if (status == 'miss'){
                 swordMissSFX.play()
-                player.sprite1Points.style.animation = "p1-hp-points-down 2s"
                 player.sprite2Points.innerHTML = 'missed'
                 player.sprite1Points.innerHTML = 'missed'
-                player.sprite2.style.animation = "p2-attack 2s"
+                this.setAnimation(player.sprite1Points, 'p1-hp-points-down', 2000)
+                this.setAnimation(player.sprite2, 'p2-attack', 2000)
             }
         }
         this.struckAnimation(player, status)
@@ -248,32 +241,32 @@ class Sprite {
             this.announceSomething('Fireball', '2s')
             explosionSFX.play()
             if (status == 'hit'){
-                player.sprite2Points.style.animation = "p2-hp-points-down 2s"
-                player.sprite1.style.animation = "p1-spell 2s"
-                player.sprite1Effect.style.animation = "p1-spell-effect 2s ease-in"
-                player.sprite2Effect.style.animation = "p2-spell-struck 2s"
+                this.setAnimation(player.sprite2Points, 'p2-hp-points-down', 2000)
+                this.setAnimation(player.sprite1, "p1-spell", 2000)
+                this.setAnimation(player.sprite1Effect, "p1-spell-effect ease-in", 2000)
+                this.setAnimation(player.sprite2Effect, "p2-spell-struck", 2000)
                 player.struckAnimation(status)
             } else if (status == 'miss') {
-                player.sprite2Points.style.animation = "p2-hp-points-down 2s"
+                this.setAnimation(prite2Points, 'p2-hp-points-down', 2000)
                 player.sprite1Points.innerHTML = 'missed'
                 player.sprite2Points.innerHTML = 'missed'
-                player.sprite1.style.animation = "p1-spell 2s"
-                player.sprite1Effect.style.animation = "p1-spell-effect 2s ease-in"
+                this.setAnimation(player.sprite1, 'p1-spell', 2000)
+                this.setAnimation(player.sprite1Effect, 'p1-spell-effect', 2000)
             } 
         } else if (turn === 'p2') {
             frostbiteSFX.play()
-            player.announceSomething('Frostbite', '2s')
-            player.sprite2.style.animation = "p2-spell 2s"
-            player.sprite2Effect.style.animation = "p1-spell-effect 2s ease-in"
+            this.announceSomething('Frostbite', '2s')
+            this.setAnimation(player.sprite2, 'p2-spell', 2000)
+            this.setAnimation(player.sprite2Effect, 'p1-spell-effect', 2000)
             if (status == 'hit'){
-                player.sprite2.style.animation = "p2-spell 2s"
-                player.sprite1Points.style.animation = "p1-hp-points-down 2s"
-                player.sprite1Effect.style.animation = "p1-spell-struck 2s"
+                this.setAnimation(player.sprite2, 'p2-spell', 2000)
+                this.setAnimation(player.sprite1Points, 'p1-hp-points-down', 2000)
+                this.setAnimation(player.sprite1Effect, 'p1-spell-struck', 2000)
             } else if (status == 'miss'){
                 player.sprite2Points.innerHTML = 'missed'
                 player.sprite1Points.innerHTML = 'missed'
-                player.sprite2.style.animation = "p2-spell 2s"
-                player.sprite1Points.style.animation = "p1-hp-points-down 2s"
+                this.setAnimation(player.sprite2, 'p2-spell', 2000)
+                this.setAnimation(player.sprite1Points, 'p1-hp-points-down', 2000)
             }
         }
         this.struckAnimation(player, status)
@@ -282,23 +275,23 @@ class Sprite {
     healAnimation () {
         if (turn === 'p1') {
             heal1SFX.play()
-            this.sprite1.style.animation = "p1-heal 2s ease-in"
-            this.sprite1Effect.style.animation = "p1-heal-effect 1s ease-in"
-            this.sprite1Points.style.animation = "p1-hp-points-up 2s"
+            this.setAnimation(player.sprite1, 'p1-heal', 2000)
+            this.setAnimation(player.sprite1Effect, 'p1-heal-effect', 2000)
+            this.setAnimation(player.sprite1Points, 'p1-hp-points-up', 2000)
         } else if (turn === 'p2') {
             heal1SFX.play()
-            this.sprite2.style.animation = "p2-heal 2s ease-in"
-            this.sprite2Effect.style.animation = "p2-heal-effect 2s ease-in"
-            this.sprite2Points.style.animation = "p2-hp-points-up 2s"
-            }
+            this.setAnimation(player.sprite2, 'p2-heal', 2000)
+            this.setAnimation(player.sprite2Effect, 'p2-heal-effect ease-in', 2000)
+            this.setAnimation(player.sprite2Points, 'p2-hp-points-up', 2000)
+        }
     }
     
     struckAnimation (player, status) {
         if (status == 'hit' || status == 'crit'){
             if (turn == 'p2') {
-                player.sprite1.style.animation = "p1-struck 500ms"
+                this.setAnimation(player.sprite1, 'p1-struck', 500)
             } else if (turn == 'p1') {
-                player.sprite2.style.animation = "p2-struck 500ms"
+                this.setAnimation(player.sprite2, 'p2-struck', 500)
             }
          }
     }
@@ -370,6 +363,10 @@ class Sprite {
     announceSomething (text, duration = '3s'){
         announceBar.innerHTML = text
         announceBar.style.animation = `announce ${duration}`
+
+        setTimeout(()=> {
+            announceBar.style.animation = ''
+        }, 2000)
     }
     // switches turns
     switchTurn(){ 
@@ -435,7 +432,7 @@ document.getElementById('p2-spell-button').addEventListener('click', ()=>{player
 document.getElementById('p2-heal-button').addEventListener('click', ()=>{player2.heal(player2)})
 document.getElementById('fight-now-button').addEventListener('click', ()=>{player1.fightNow()}, ()=>{console.log('play game')})
 document.getElementById('fight-again-button').addEventListener('click', ()=>{location.reload()})
-document.getElementById('mute').addEventListener('click', ()=>{toggleMute()
+document.getElementById('mute-button').addEventListener('change', ()=>{toggleMute()
 })
 
 // notes=====================================================================
