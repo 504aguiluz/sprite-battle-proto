@@ -175,23 +175,51 @@ class Sprite {
     }
 
     // animation methods======================================================
+
+    /***********************
+     *                     *
+     * Ken's Helper Method *
+     *                     *
+     ***********************/
+
+    setAnimation(element, animationClass, timeInMS) {
+        // Applies the animationClass to the element with the time in MS, and then
+        // removes it after that time passes. This allows the animation to be reapplied
+        // when the same animationClass is used consecutively
+        
+        let seconds = timeInMS / 1000  // Gets the time in seconds
+        element.style.animation = `${animationClass} ${seconds}s`
+        
+        setTimeout(() => {
+            element.style.animation = ''
+        }, timeInMS)
+    }
+
+
     fightAnimation(player, status){
         if (turn === 'p1') {
             if (status == 'hit'){
                 swordHitSFX.play()
-                player.sprite2Points.style.animation = "p2-hp-points-down 2s"
-                player.sprite1.style.animation = "p1-attack 2s"
+                // player.sprite2Points.style.animation = "p2-hp-points-down 2s"
+                // player.sprite1.style.animation = "p1-attack 2s"
+                this.setAnimation(player.sprite2Points, 'p2-hp-points-down', 2000)
+                this.setAnimation(player.sprite1, 'p1-attack', 2000)
             } else if (status == 'crit'){
                 swordCritSFX.play()
-                player.sprite2Points.style.animation = "p2-hp-points-down 2s"
-                player.sprite1.style.animation = "p1-attack 2s"
-                player.sprite2Effect.style.animation = "p2-crit-struck 1s"
+                // player.sprite2Points.style.animation = "p2-hp-points-down 2s"
+                // player.sprite1.style.animation = "p1-attack 2s"
+                // player.sprite2Effect.style.animation = "p2-crit-struck 1s"
+                this.setAnimation(player.sprite2Points, 'p2-hp-points-down', 2000)
+                this.setAnimation(player.sprite1, 'p1-attack', 2000)
+                this.setAnimation(player.sprite2Effect, 'p2-crit-struck', 1000)
             } else if (status == 'miss'){
                 swordMissSFX.play()
-                player.sprite2Points.style.animation = "p2-hp-points-down 2s"
                 player.sprite1Points.innerHTML = 'missed'
                 player.sprite2Points.innerHTML = 'missed'
-                player.sprite1.style.animation = "p1-attack 2s"
+                // player.sprite2Points.style.animation = "p2-hp-points-down 2s"
+                // player.sprite1.style.animation = "p1-attack 2s"
+                this.setAnimation(player.sprite2Points, 'p2-hp-points-down', 2000)
+                this.setAnimation(player.sprite1, 'p1-attack', 2000)
             }
         } else if (turn === 'p2') {
             if (status == 'hit'){
