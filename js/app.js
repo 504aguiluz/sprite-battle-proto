@@ -167,28 +167,23 @@ class Sprite {
     }
         
     heal(player){
-        player.rollD8(1)
-        if(player.currentMP < 5)
-        player.currentHp += this.d8*2
-        player.sprite1Points.innerHTML = `+${this.d8*2}`
-        player.sprite2Points.innerHTML = `+${this.d8*2}`
-        player.currentMp -= 5
-        player.healAnimation()
+        console.log(player.currentMp)
+        if(player.currentMp >= 5){
+            player.rollD8(1)
+            player.currentHp += this.d8*2
+            player.sprite1Points.innerHTML = `+${this.d8*2}`
+            player.sprite2Points.innerHTML = `+${this.d8*2}`
+            player.currentMp -= 5
+            player.healAnimation(player)
+        } else if (player.currentMp < 5) {
+            player.announceSomething(`Not enough MP!`)
+        }
         this.updateStats()
     }
 
     // animation methods======================================================
 
-    /***********************
-     *                     *
-     * Ken's Helper Method *
-     *                     *
-     ***********************/
-
     setAnimation(element, animationClass, timeInMS) {
-        // Applies the animationClass to the element with the time in MS, and then
-        // removes it after that time passes. This allows the animation to be reapplied
-        // when the same animationClass is used consecutively
         
         let seconds = timeInMS / 1000  // Gets the time in seconds
         element.style.animation = `${animationClass} ${seconds}s`
@@ -250,7 +245,7 @@ class Sprite {
                 this.setAnimation(player.sprite2Effect, "p2-spell-struck", 2000)
                 player.struckAnimation(status)
             } else if (status == 'miss') {
-                this.setAnimation(prite2Points, 'p2-hp-points-down', 2000)
+                this.setAnimation(sprite2Points, 'p2-hp-points-down', 2000)
                 player.sprite1Points.innerHTML = 'missed'
                 player.sprite2Points.innerHTML = 'missed'
                 this.setAnimation(player.sprite1, 'p1-spell', 2000)
