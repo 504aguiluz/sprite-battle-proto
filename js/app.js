@@ -142,8 +142,8 @@ class Sprite {
     spell(player, opponent, status = 'hit'){
         player.rollD20(1, 'spell attack roll')
         console.log(`d20 roll: ${this.d20}`)
-        player.spellAnimation(player, status)
         if(this.d20 >= opponent.ac && this.d20 !== 20 && player.currentMp > 0){
+            player.spellAnimation(player, status)
             opponent.currentHp -= player.spellDmg
             player.sprite1Points.innerHTML = `-${player.spellDmg}`
             player.sprite2Points.innerHTML = `-${player.spellDmg}`
@@ -155,10 +155,12 @@ class Sprite {
             player.sprite1Points.innerHTML = `critical hit!\n-${player.spellCrit}`
             player.sprite2Points.innerHTML = `critical hit!\n-${player.spellCrit}`
             player.sprite1Effect
+            player.currentMp -= 5
         } else if (this.d20 < opponent.ac) {
             status = 'miss'
-            // player.spellAnimation(player, status)
-        } else if (player.currentMp <= 0) {
+            player.spellAnimation(player, status)
+            player.currentMp -= 5
+        } else if (player.currentMp < 5) {
             player.announceSomething(`Not enough MP!`)
         }
         this.updateStats()
@@ -166,6 +168,7 @@ class Sprite {
         
     heal(player){
         player.rollD8(1)
+        if(player.currentMP < 5)
         player.currentHp += this.d8*2
         player.sprite1Points.innerHTML = `+${this.d8*2}`
         player.sprite2Points.innerHTML = `+${this.d8*2}`
@@ -272,7 +275,7 @@ class Sprite {
         this.struckAnimation(player, status)
     }
     
-    healAnimation () {
+    healAnimation (player) {
         if (turn === 'p1') {
             heal1SFX.play()
             this.setAnimation(player.sprite1, 'p1-heal', 2000)
