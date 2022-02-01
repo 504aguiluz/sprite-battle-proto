@@ -74,5 +74,4 @@ Here's a link to [Sprite Club](https://504aguiluz.github.io/sprite-battle-proto/
 # KNOWN BUGS
 
 - characters briefly appear before title screen
-- mute button must be cycled before unmuting
-- animations/sfx execute inconsistently
+- not mobile friendly yet
